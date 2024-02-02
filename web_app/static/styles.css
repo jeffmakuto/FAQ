@@ -10,7 +10,7 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
-    max-width: 200px;
+    max-width: 200px; /* Adjust the initial max-width to your preference */
     width: 100%;
     background-color: #fff;
     border-radius: 5px;
@@ -33,7 +33,8 @@ body {
 .chat-container-content {
     flex-grow: 1;
     padding: 10px;
-    overflow-y: auto;
+    overflow-y: scroll; /* Set to 'scroll' for a scrollable area */
+    max-height: 300px; /* Set a maximum height for the scrollable area */
 }
 
 .message {
