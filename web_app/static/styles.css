@@ -1,4 +1,5 @@
 /* styles.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -10,13 +11,21 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    max-width: 300px; /* Adjust as needed */
+    max-width: 300px;
     width: 100%;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transform: translate(0, 50%);
+    transform: translate(0, 100%);
+}
+
+/* Ensure the chat container is visible and doesn't go off-screen */
+@media (max-width: 320px) {
+    .container {
+        right: 0;
+        max-width: 100%;
+    }
 }
 
 .chat-container-inner {
@@ -45,7 +54,6 @@ body {
     flex-grow: 1;
     padding: 10px;
     overflow-y: scroll;
-    max-height: 300px;
 }
 
 .message {
@@ -55,7 +63,7 @@ body {
 .user-input {
     display: flex;
     padding: 10px;
-    justify-content: flex-end;
+    justify-content: space-between; /* Adjusted to evenly distribute content */
     align-items: center;
 }
 
@@ -65,7 +73,6 @@ input {
     margin-right: 10px;
     border: 1px solid #ddd;
     border-radius: 3px;
-    flex-shrink: 0; /* Prevent the input from shrinking */
 }
 
 button {
@@ -75,17 +82,16 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    flex-shrink: 0; /* Prevent the button from shrinking */
 }
 
 .container.enlarged {
     max-width: 50%;
-    bottom: 0;
-    transform: translate(-50%, -50%); /* Center the container */
+    bottom: 20px;
+    transform: translate(0, 0); /* Center the container */
 }
 
 .container.enlarged .user-input {
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 /* Ensure the send button is always visible */
