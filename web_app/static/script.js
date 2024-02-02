@@ -60,5 +60,5 @@ function sendInitialGreeting() {
     /* Remove the greeting message after 5 seconds */
     setTimeout(() => {
         greetingMessage.remove();
-    }, 5000);
+    }, 3000);
 }
