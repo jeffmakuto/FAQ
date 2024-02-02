@@ -8,14 +8,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <div class="chat-container" id="chat-container"></div>
-        <div class="user-input">
-            <input type="text" id="user-input" placeholder="Type your question...">
-            <button onclick="sendMessage()">Send</button>
+    <div class="container" id="chat-container">
+        <div class="chat-container-inner">
+            <div class="chat-container-header">
+                <button id="enlarge-btn" onclick="toggleEnlarge()">Enlarge</button>
+            </div>
+            <div class="chat-container-content" id="chat-container-content"></div>
+            <div class="user-input">
+                <input type="text" id="user-input" placeholder="Type your question...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
-
