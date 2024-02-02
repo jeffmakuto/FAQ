@@ -11,18 +11,18 @@ body {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    width: 300px; /* Set the default width to the enlarged size */
-    margin: 20px auto;
+    max-width: 300px; /* Set the maximum width to control expansion */
+    margin: auto;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: width 0.5s;
+    transition: max-width 0.5s;
 }
 
 .chat-container {
     padding: 20px;
-    height: 300px;
+    max-height: 300px; /* Set the maximum height for scrolling */
     overflow-y: auto;
     border-bottom: 1px solid #ddd;
 }
@@ -40,9 +40,9 @@ input {
     border-radius: 3px;
 }
 
-button {
+button, .enlarge-button {
     padding: 8px 15px;
-    background-color: #4caf50;
+    background-color: #ff0000; /* Red color */
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -53,9 +53,10 @@ button {
     display: block;
     margin-top: 10px;
     padding: 5px;
-    background-color: #3498db;
+    background-color: #ff0000; /* Red color */
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    transform: rotate(-45deg); /* Diagonal arrow */
 }
