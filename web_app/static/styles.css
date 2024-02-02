@@ -81,5 +81,8 @@ button {
 }
 
 .container.enlarged .user-input {
-    justify-content: flex-end;
+    justify-content: center;
 }
+
+.container:not(.enlarged) .user-input button {
+    display: inline-block;
