@@ -1,5 +1,4 @@
-/* styles.css */
-
+/* static/styles.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,63 +7,24 @@ body {
 }
 
 .container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    max-width: 300px;
-    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transform: translate(0, 100%);
 }
 
-/* Ensure the chat container is visible and doesn't go off-screen */
-@media (max-width: 320px) {
-    .container {
-        right: 0;
-        max-width: 100%;
-    }
-}
-
-.chat-container-inner {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.chat-container-header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-}
-
-#enlarge-btn {
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    outline: none;
-    color: red; /* Change color to red */
-    transform: rotate(-45deg); /* Diagonal arrow */
-}
-
-.chat-container-content {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: scroll;
-}
-
-.message {
-    margin-bottom: 10px;
+.chat-container {
+    padding: 20px;
+    height: 300px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
 }
 
 .user-input {
     display: flex;
     padding: 10px;
-    justify-content: space-between; /* Adjusted to evenly distribute content */
-    align-items: center;
 }
 
 input {
@@ -77,30 +37,9 @@ input {
 
 button {
     padding: 8px 15px;
-    background-color: red; /* Change color to red */
+    background-color: #4caf50;
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-}
-
-.container.enlarged {
-    max-width: 50%;
-    bottom: 20px;
-    transform: translate(0, 0); /* Center the container */
-}
-
-.container.enlarged .user-input {
-    justify-content: flex-end;
-}
-
-/* Ensure the send button is always visible */
-.user-input button {
-    flex-shrink: 0;
-}
-
-/* Limit the height of the chat content area when enlarged */
-.container.enlarged .chat-container-content {
-    max-height: 300px;
-    overflow-y: scroll;
 }
