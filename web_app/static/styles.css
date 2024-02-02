@@ -1,3 +1,4 @@
+/* styles.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -36,6 +37,7 @@ body {
     cursor: pointer;
     outline: none;
     color: red; /* Change color to red */
+    transform: rotate(-45deg); /* Diagonal arrow */
 }
 
 .chat-container-content {
@@ -71,6 +73,7 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    flex-shrink: 0; /* Prevent the button from shrinking */
 }
 
 .container.enlarged {
