@@ -101,6 +101,6 @@ button {
 
 /* Limit the height of the chat content area when enlarged */
 .container.enlarged .chat-container-content {
-    max-height: 250px;
+    max-height: 300px;
     overflow-y: scroll;
 }
