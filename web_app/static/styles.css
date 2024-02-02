@@ -8,8 +8,8 @@ body {
 
 .container {
     position: fixed;
-    bottom: 0;
-    right: 0;
+    bottom: 50;
+    right: 20;
     max-width: 200px;
     width: 100%;
     background-color: #fff;
