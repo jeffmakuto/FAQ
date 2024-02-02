@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, jsonify
+import os
 
 app = Flask(__name__)
+
+template_folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_static', 'templates'))
+app.template_folder = template_folder_path
 
 @app.route('/')
 def index():
