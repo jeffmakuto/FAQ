@@ -7,17 +7,32 @@ body {
 }
 
 .container {
-    max-width: 600px;
-    margin: 20px auto;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    max-width: 200px; /* Adjust the initial max-width to your preference */
+    width: 100%;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
-.chat-container {
-    padding: 20px;
-    height: 300px;
+.chat-container-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat-container-header {
+    padding: 10px;
+    background-color: #ddd;
+    text-align: center;
+}
+
+.chat-container-content {
+    flex-grow: 1;
+    padding: 10px;
     overflow-y: auto;
     border-bottom: 1px solid #ddd;
 }
@@ -44,3 +59,9 @@ button {
     cursor: pointer;
 }
 
+/* Enlarged state */
+.container.enlarged {
+    max-width: 50%;
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+}
