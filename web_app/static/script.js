@@ -1,9 +1,9 @@
-// static/script.js
+/* static/script.js */
 document.addEventListener('DOMContentLoaded', function () {
-    // Function to send initial greeting
+    /* Function to send initial greeting */
     sendInitialGreeting();
     
-    // Enable sending message on Enter key press
+    /* Enable sending message on Enter key press */
     document.getElementById('user-input').addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
             sendMessage();
@@ -15,10 +15,10 @@ function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     const chatContainer = document.getElementById('chat-container-content');
 
-    // Display user message
+    /* Display user message */
     chatContainer.innerHTML += `<div class="message">User: ${userInput}</div>`;
 
-    // Send user input to Flask backend
+    /* Send user input to Flask backend */
     fetch('/api/bot', {
         method: 'POST',
         headers: {
@@ -28,28 +28,28 @@ function sendMessage() {
     })
     .then(response => response.json())
     .then(data => {
-        // Display bot response
+        /* Display bot response */
         chatContainer.innerHTML += `<div class="message">Bot: ${data.bot_response}</div>`;
         
-        // Scroll to the bottom of the chat container
+        /* Scroll to the bottom of the chat container */
         chatContainer.scrollTop = chatContainer.scrollHeight;
     })
     .catch(error => console.error('Error:', error));
 
-    // Clear user input
+    /* Clear user input */
     document.getElementById('user-input').value = '';
 }
 
-// Function to toggle the enlarged state
+/* Function to toggle the enlarged state */
 function toggleEnlarge() {
     const chatContainer = document.getElementById('chat-container');
     chatContainer.classList.toggle('enlarged');
 }
 
-// Function to send initial greeting
+/* Function to send initial greeting */
 function sendInitialGreeting() {
     const chatContainer = document.getElementById('chat-container-content');
     
-    // Display initial greeting
+    /* Display initial greeting */
     chatContainer.innerHTML += `<div class="message">Bot: Hi there! I'm Bota! How can I help?</div>`;
 }
