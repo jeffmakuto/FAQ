@@ -55,8 +55,8 @@ body {
 .user-input {
     display: flex;
     padding: 10px;
-    justify-content: space-between;
-    align-items: center; /* Center items vertically */
+    justify-content: flex-end;
+    align-items: center;
 }
 
 input {
@@ -90,7 +90,7 @@ button {
 
 /* Ensure the send button is always visible */
 .user-input button {
-    display: inline-block;
+    flex-shrink: 0;
 }
 
 /* Limit the height of the chat content area when enlarged */
