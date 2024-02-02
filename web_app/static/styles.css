@@ -25,9 +25,16 @@ body {
 }
 
 .chat-container-header {
+    display: flex;
+    justify-content: flex-end; /* Align content to the top right corner */
     padding: 10px;
-    background-color: #ddd;
-    text-align: center;
+}
+
+#enlarge-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .chat-container-content {
