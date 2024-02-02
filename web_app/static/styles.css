@@ -8,14 +8,15 @@ body {
 
 .container {
     position: fixed;
-    bottom: 0;
-    right: 0;
-    max-width: 200px;
+    bottom: 20px;
+    right: 20px;
+    max-width: 300px; /* Adjust as needed */
     width: 100%;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    transform: translate(0, 50%);
 }
 
 .chat-container-inner {
@@ -55,6 +56,7 @@ body {
     display: flex;
     padding: 10px;
     justify-content: space-between;
+    align-items: center; /* Center items vertically */
 }
 
 input {
@@ -93,6 +95,6 @@ button {
 
 /* Limit the height of the chat content area when enlarged */
 .container.enlarged .chat-container-content {
-    max-height: 150px;
+    max-height: 300px;
     overflow-y: scroll;
 }
