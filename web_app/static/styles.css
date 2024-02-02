@@ -52,7 +52,6 @@ body {
 .user-input {
     display: flex;
     padding: 10px;
-    justify-content: space-between; /* Add this line */
 }
 
 input {
@@ -82,8 +81,4 @@ button {
 
 .container.enlarged .user-input {
     justify-content: center;
-}
-
-.user-input button {
-    display: inline-block;
 }
