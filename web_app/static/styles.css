@@ -10,7 +10,7 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
-    max-width: 200px; /* Adjust the initial max-width to your preference */
+    max-width: 200px;
     width: 100%;
     background-color: #fff;
     border-radius: 5px;
@@ -34,7 +34,10 @@ body {
     flex-grow: 1;
     padding: 10px;
     overflow-y: auto;
-    border-bottom: 1px solid #ddd;
+}
+
+.message {
+    margin-bottom: 10px;
 }
 
 .user-input {
