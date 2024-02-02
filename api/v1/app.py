@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 template_folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_static', 'templates'))
 app.template_folder = template_folder_path
+app.static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_static', 'static'))
 
 @app.route('/')
 def index():
@@ -20,5 +21,4 @@ def bot():
     return jsonify({'bot_response': bot_response})
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    app.run(host='0.0.0.0', port=5000, debug=True)
