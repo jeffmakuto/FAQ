@@ -84,6 +84,6 @@ button {
     justify-content: center;
 }
 
-.container:not(.enlarged) .user-input button {
+.user-input button {
     display: inline-block;
 }
