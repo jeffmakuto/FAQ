@@ -1,4 +1,16 @@
 // static/script.js
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to send initial greeting
+    sendInitialGreeting();
+    
+    // Enable sending message on Enter key press
+    document.getElementById('user-input').addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
+});
+
 function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     const chatContainer = document.getElementById('chat-container');
@@ -25,15 +37,16 @@ function sendMessage() {
     document.getElementById('user-input').value = '';
 }
 
-// Enable sending message on Enter key press
-document.getElementById('user-input').addEventListener('keyup', function (event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-});
-
 // Function to toggle the enlarged state
 function toggleEnlarge() {
     const chatContainer = document.getElementById('chat-container');
     chatContainer.classList.toggle('enlarged');
+}
+
+// Function to send initial greeting
+function sendInitialGreeting() {
+    const chatContainer = document.getElementById('chat-container-content');
+    
+    // Display initial greeting
+    chatContainer.innerHTML += `<div>Bot: Hi there! I'm Bota! How can I help?</div>`;
 }
