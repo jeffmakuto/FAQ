@@ -1,4 +1,3 @@
-/* static/styles.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -10,7 +9,7 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
-    max-width: 200px; /* Adjust the initial max-width to your preference */
+    max-width: 200px;
     width: 100%;
     background-color: #fff;
     border-radius: 5px;
@@ -26,7 +25,7 @@ body {
 
 .chat-container-header {
     display: flex;
-    justify-content: flex-end; /* Align content to the top right corner */
+    justify-content: flex-end;
     padding: 10px;
 }
 
@@ -35,14 +34,15 @@ body {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    outline: none; /* Add this to remove the button outline on focus */
+    outline: none;
+    color: red; /* Change color to red */
 }
 
 .chat-container-content {
     flex-grow: 1;
     padding: 10px;
-    overflow-y: scroll; /* Set to 'scroll' for a scrollable area */
-    max-height: 300px; /* Set a maximum height for the scrollable area */
+    overflow-y: scroll;
+    max-height: 300px;
 }
 
 .message {
@@ -52,6 +52,7 @@ body {
 .user-input {
     display: flex;
     padding: 10px;
+    justify-content: space-between; /* Add this line */
 }
 
 input {
@@ -64,16 +65,21 @@ input {
 
 button {
     padding: 8px 15px;
-    background-color: #4caf50;
+    background-color: red; /* Change color to red */
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    display: block; /* Ensure the button is always visible */
+    margin-top: 10px; /* Add some top margin */
 }
 
-/* Enlarged state */
 .container.enlarged {
     max-width: 50%;
-    bottom: 50%;
-    transform: translate(-50%, 50%);
+    bottom: 0;
+    transform: translate(0, 0);
+}
+
+.container.enlarged .user-input {
+    justify-content: flex-end;
 }
