@@ -52,6 +52,7 @@ body {
 .user-input {
     display: flex;
     padding: 10px;
+    justify-content: space-between;
 }
 
 input {
@@ -60,6 +61,7 @@ input {
     margin-right: 10px;
     border: 1px solid #ddd;
     border-radius: 3px;
+    flex-shrink: 0; /* Prevent the input from shrinking */
 }
 
 button {
@@ -69,16 +71,25 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    display: block; /* Ensure the button is always visible */
-    margin-top: 10px; /* Add some top margin */
 }
 
 .container.enlarged {
     max-width: 50%;
     bottom: 0;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Center the container */
 }
 
 .container.enlarged .user-input {
     justify-content: center;
+}
+
+/* Ensure the send button is always visible */
+.user-input button {
+    display: inline-block;
+}
+
+/* Limit the height of the chat content area when enlarged */
+.container.enlarged .chat-container-content {
+    max-height: 300px;
+    overflow-y: scroll;
 }
