@@ -3,8 +3,8 @@ import os
 
 app = Flask(__name__)
 
-app.html_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'templates'))
-app.static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'static'))
+app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'templates'))
+app.static_folder= os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'static'))
 
 @app.route('/')
 def index():

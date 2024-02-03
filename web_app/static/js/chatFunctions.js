@@ -1,17 +1,5 @@
-/* static/script.js */
-document.addEventListener('DOMContentLoaded', function () {
-    /* Function to send initial greeting */
-    sendInitialGreeting();
-    
-    /* Enable sending message on Enter key press */
-    document.getElementById('user-input').addEventListener('keyup', function (event) {
-        if (event.key === 'Enter') {
-            sendMessage();
-        }
-    });
-});
-
-function sendMessage() {
+/* chatFunctions.js */
+export function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     const chatContainer = document.getElementById('chat-container-content');
 
@@ -40,14 +28,7 @@ function sendMessage() {
     document.getElementById('user-input').value = '';
 }
 
-/* Function to toggle the enlarged state */
-function toggleEnlarge() {
-    const chatContainer = document.getElementById('chat-container');
-    chatContainer.classList.toggle('enlarged');
-}
-
-/* Function to send initial greeting */
-function sendInitialGreeting() {
+export function sendInitialGreeting() {
     const chatContainer = document.getElementById('chat-container-content');
     
     /* Display initial greeting */
@@ -62,3 +43,4 @@ function sendInitialGreeting() {
         greetingMessage.remove();
     }, 3000);
 }
+
