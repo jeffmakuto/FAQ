@@ -11,5 +11,5 @@ class TestRuleBasedBot(unittest.Testcase):
         """
         bot = RuleBasedBot()
         bot.add_to_db("What is the KQ acronym in full?", "Kenya Airways")
-        response = bot.respond("What is the KQ acronym in ful?")
+        response = bot.respond("What is the KQ acronym in full?")
         self.assertEqual(response, "Kenya Airways")
