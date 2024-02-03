@@ -3,29 +3,24 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
 }
 
 .container {
-    max-width: 300px;
-    width: 100%;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    max-width: 300px; /* Set the maximum width to control expansion */
+    margin: auto;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-}
-
-.container.enlarged {
-    width: 300px;
-    height: 300px;
+    transition: max-width 0.5s;
 }
 
 .chat-container {
     padding: 20px;
-    max-height: calc(100% - 40px);
+    max-height: 300px; /* Set the maximum height for scrolling */
     overflow-y: auto;
     border-bottom: 1px solid #ddd;
 }
@@ -33,20 +28,19 @@ body {
 .user-input {
     display: flex;
     padding: 10px;
-    border-top: 1px solid #ddd;
 }
 
 input {
     flex: 1;
     padding: 8px;
     margin-right: 10px;
-    border: none;
+    border: 1px solid #ddd;
     border-radius: 3px;
 }
 
 button, .enlarge-button {
     padding: 8px 15px;
-    background-color: #ff0000;
+    background-color: #ff0000; /* Red color */
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -56,16 +50,11 @@ button, .enlarge-button {
 .enlarge-button {
     display: block;
     margin-top: 10px;
-    padding: 8px 15px; /* Adjust the size */
-    background-color: #ff0000;
+    padding: 5px;
+    background-color: #ff0000; /* Red color */
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    transform: rotate(-45deg);
-}
-
-/* Add a class for the scrollbar */
-.scrollbar {
-    overflow-y: auto;
+    transform: rotate(-45deg); /* Diagonal arrow */
 }
