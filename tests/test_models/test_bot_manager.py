@@ -36,7 +36,7 @@ class TestAdmin(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """ Initialize RuleBasedBot instance """
+        """ Initialize RuleBasedBot instance and Admin instance """
         cls.bot = RuleBasedBot()
         cls.admin = Admin(cls.bot)
         cls.user_input = "How do I reset my password?"
@@ -46,17 +46,16 @@ class TestAdmin(unittest.TestCase):
     def test_notification(self):
         """ Test method for if admin received a notification """
         self.assertTrue(self.admin.has_unanswered_queries())
-        self.assertEqual(self.admin_response, self.admin.provide_answer(self.user_input))
+        self.assertEqual(self.admin_response, self.admin.get_response(self.user_input))
 
     def test_view_unanswered_queries(self):
         """ Test method for if the admin can view the list of queries """
         self.assertIn(self.user_input, self.admin.get_unanswered_queries())
 
     def test_mark_resolved(self):
-        """ test method for if the admin has resolved the queries """
+        """ Test method for if the admin has resolved the queries """
         self.admin.mark_resolved(self.user_input)
         self.assertFalse(self.admin.has_unanswered_queries())
-
 
 if __name__ == "__main__":
     unittest.main()
