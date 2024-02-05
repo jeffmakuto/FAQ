@@ -24,5 +24,5 @@ class RuleBasedBot:
         if user_input in self.db:
             return self.db[user_input]
         else:
-            self.add_to_db(user_input, "...")
-            return "I don't have answer for that, sorry"
+            self.add_to_db(user_input, "Hello admin, please reply to the query. Thank you")
+            return "I don't have an answer for that, sorry."
