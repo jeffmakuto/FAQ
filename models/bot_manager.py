@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """ Module that handles the bot's logic features """
+import smtplib
+from email.mime.text import MIMEText
 
 
 class RuleBasedBot:
@@ -94,3 +96,46 @@ class Admin:
         """
         if q in self.unanswered_queries:
             del self.unanswered_queries[q]
+
+    def forward_query_to_admin(self, q, smtp_server, smtp_port, sender_email, sender_password, recipient_email):
+        """
+        Forward a query to the admin's email from the bot's email and mark it as unresolved.
+
+        Parameters:
+        - q (str): The question to forward to the admin.
+        - smtp_server (str): SMTP server address.
+        - smtp_port (int): SMTP server port.
+        - sender_email (str): Bot's email address.
+        - sender_password (str): Bot's email password.
+        - recipient_email (str): Admin's email address.
+        """
+        try:
+            if q not in self.unanswered_queries:
+                # Only forward if the question is not already marked as unresolved
+                self.unanswered_queries[q] = "Forwarded to admin's email. Waiting for response."
+
+                # Create MIMEText object
+                msg = MIMEText(f"The bot received a new query:\n\n{q}\n\nPlease respond to the user.")
+                msg["Subject"] = "New Query: " + q
+                msg["From"] = sender_email
+                msg["To"] = recipient_email
+
+                # Establish a connection to the SMTP server
+                with smtplib.SMTP(smtp_server, smtp_port) as server:
+                    # Start TLS for security
+                    server.starttls()
+
+                    # Log in to the email server
+                    server.login(sender_email, sender_password)
+
+                    # Send the email
+                    server.sendmail(sender_email, [recipient_email], msg.as_string())
+
+                    # Log successful email forwarding
+                    self.log.info(f"Query forwarded successfully: {q}")
+
+        except Exception as e:
+            # Log the exception and mark the query as unresolved
+            self.log.error(f"Error forwarding query '{q}': {e}")
+            self.unanswered_queries[q] = "Error forwarding to admin. Please try again."
+
