@@ -26,3 +26,71 @@ class RuleBasedBot:
         else:
             self.add_to_db(user_input, "Hello admin, please reply to the query. Thank you")
             return "I don't have an answer for that, sorry."
+
+
+class Admin:
+    """
+    Admin class responsible for managing unanswered queries and providing answers.
+
+    Attributes:
+    - bot (object): An instance of the RuleBasedBot class for communication.
+    - unanswered_queries (dict): A dictionary to store unanswered queries and their corresponding answers.
+
+    Methods:
+    - has_unanswered_queries(): Check if there are any unanswered queries.
+    - get_unanswered_queries(): Get a list of unanswered queries.
+    - mark_resolved(query): Mark a query as resolved.
+    - provide_answer(query, answer): Provide an answer to an unanswered query.
+    """
+
+    def __init__(self, bot):
+        """
+        Initialize the Admin instance.
+
+        Parameters:
+        - bot (object): An instance of the RuleBasedBot class for communication.
+        """
+        self.bot = bot
+        self.unanswered_queries = {}
+
+    def has_unanswered_queries(self):
+        """
+        Check if there are any unanswered queries.
+
+        Returns:
+        - bool: True if there are unanswered queries, False otherwise.
+        """
+        return bool(self.unanswered_queries)
+
+    def get_unanswered_queries(self):
+        """
+        Get a list of unanswered queries.
+
+        Returns:
+        - list: A list of unanswered queries.
+        """
+        return list(self.unanswered_queries.keys())
+
+    def mark_resolved(self, query):
+        """
+        Mark a query as resolved.
+
+        Parameters:
+        - query (str): The query to mark as resolved.
+        """
+        if query in self.unanswered_queries:
+            del self.unanswered_queries[query]
+
+    def provide_answer(self, query, answer):
+        """
+        Provide an answer to an unanswered query.
+
+        Parameters:
+        - query (str): The unanswered query.
+        - answer (str): The answer to the query.
+
+        Returns:
+        - str: A message confirming that the answer has been provided.
+        """
+        self.unanswered_queries[query] = answer
+        return f"Admin: {answer}"
