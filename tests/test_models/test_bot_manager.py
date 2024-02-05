@@ -153,7 +153,7 @@ class TestAdmin(unittest.TestCase):
 
             # Assert that the query has been marked as unresolved with an error message
             self.assertIn(query, admin.unanswered_queries)
-            self.assertEqual(admin.unanswered_queries[query], "Forwarded to admin's email. Waiting for response.")
+            self.assertEqual(admin.unanswered_queries[query], "Error forwarding to admin. Please try again.")
 
             # Assert that the smtplib.SMTP class and its methods were called correctly
             mock_smtp.assert_called_once_with(smtp_server, smtp_port)
