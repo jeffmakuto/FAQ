@@ -74,7 +74,7 @@ class Admin:
         Returns:
         - str: The admin's response or a default message if the question is not in the unanswered queries.
         """
-        return self.unanswered_queries.get(q, "No response available")
+        return self.unanswered_queries.get(q, "I don't have an answer for that, sorry.")
 
     def get_unanswered_queries(self):
         """
