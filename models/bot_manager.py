@@ -2,6 +2,10 @@
 """ Module that handles the bot's logic features """
 import smtplib
 from email.mime.text import MIMEText
+import logging
+
+# Configure the logger
+logging.basicConfig(level=logging.INFO)
 
 
 class RuleBasedBot:
