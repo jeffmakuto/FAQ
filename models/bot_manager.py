@@ -44,16 +44,16 @@ class Admin:
         self.bot = bot
         self.unanswered_queries = {}
 
-    def provide_answer(self, question, answer):
+    def provide_answer(self, q, a):
         """
         Provide an answer to a question, add it to the bot's database, and track it as an unanswered query.
 
         Parameters:
-        - question (str): The question for which the admin provides an answer.
-        - answer (str): The admin's response to the question.
+        - q (str): The question for which the admin provides an answer.
+        - a (str): The admin's response to the question.
         """
-        self.bot.add_to_db(question, answer)
-        self.unanswered_queries[question] = answer
+        self.bot.add_to_db(q, a)
+        self.unanswered_queries[q] = a
 
     def has_unanswered_queries(self):
         """
@@ -64,17 +64,17 @@ class Admin:
         """
         return bool(self.unanswered_queries)
 
-    def get_response(self, question):
+    def get_response(self, q):
         """
         Get the admin's response to a specific question.
 
         Parameters:
-        - question (str): The question for which the admin's response is requested.
+        - q (str): The question for which the admin's response is requested.
 
         Returns:
         - str: The admin's response or a default message if the question is not in the unanswered queries.
         """
-        return self.unanswered_queries.get(question, "No response available")
+        return self.unanswered_queries.get(q, "No response available")
 
     def get_unanswered_queries(self):
         """
@@ -85,12 +85,12 @@ class Admin:
         """
         return list(self.unanswered_queries.keys())
 
-    def mark_resolved(self, question):
+    def mark_resolved(self, q):
         """
         Mark a specific question as resolved, removing it from the list of unanswered queries.
 
         Parameters:
-        - question (str): The question to mark as resolved.
+        - q (str): The question to mark as resolved.
         """
-        if question in self.unanswered_queries:
-            del self.unanswered_queries[question]
+        if q in self.unanswered_queries:
+            del self.unanswered_queries[q]
