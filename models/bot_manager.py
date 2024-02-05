@@ -46,9 +46,11 @@ class Admin:
 
         Parameters:
         - bot (RuleBasedBot): The RuleBasedBot instance to work with.
+        - log : Initialize logger
         """
         self.bot = bot
         self.unanswered_queries = {}
+        self.log = logging.getLogger(__name__)
 
     def provide_answer(self, q, a):
         """
