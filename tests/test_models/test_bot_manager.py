@@ -28,36 +28,74 @@ class TestRuleBasedBot(unittest.TestCase):
 
 
 class TestAdmin(unittest.TestCase):
-    """
-    Test that the admin receives a notification for queries users didn't find an answer to.
-    Test that the admin can view the list of queries users didn't find an answer to.
-    Test that the admin can mark queries as resolved
-    """
 
-    @classmethod
-    def setUpClass(cls):
-        """ Initialize RuleBasedBot instance and Admin instance """
-        cls.bot = RuleBasedBot()
-        cls.admin = Admin(cls.bot)
-        cls.user_input = "How do I reset my password?"
+    def setUp(self):
+        """
+        Set up the test environment by creating a RuleBasedBot instance and an Admin instance.
+        """
+        self.bot = RuleBasedBot()
+        self.admin = Admin(self.bot)
 
-    def test_notification(self):
-        """ Test method for if admin received a notification """
-        self.admin.receive_query(self.user_input)
-        self.assertTrue(self.admin.has_unanswered_queries())
-        self.assertEqual(self.admin_response, self.admin.get_response(self.user_input))
+    def test_provide_answer(self):
+        """
+        Test the provide_answer method of the Admin class.
+        """
+        question = "What is the capital of France?"
+        answer = "The capital of France is Paris."
 
-    def test_view_unanswered_queries(self):
-        """ Test method for if the admin can view the list of queries """
-        self.admin.receive_query(self.user_input)
-        self.assertIn(self.user_input, self.admin.get_unanswered_queries())
+        self.admin.provide_answer(question, answer)
 
-    def test_mark_resolved(self):
-        """ Test method for if the admin has resolved the queries """
-        self.admin.receive_query(self.user_input)
-        self.admin.mark_resolved(self.user_input)
+        self.assertIn(question, self.bot.database)
+        self.assertEqual(self.bot.database[question], answer)
+
+        self.assertIn(question, self.admin.unanswered_queries)
+        self.assertEqual(self.admin.unanswered_queries[question], answer)
+
+    def test_has_unanswered_queries(self):
+        """
+        Test the has_unanswered_queries method of the Admin class.
+        """
         self.assertFalse(self.admin.has_unanswered_queries())
 
+        self.admin.provide_answer("Question 1", "Answer 1")
+        self.assertTrue(self.admin.has_unanswered_queries())
 
-if __name__ == "__main__":
+    def test_get_response(self):
+        """
+        Test the get_response method of the Admin class.
+        """
+        question = "What is the meaning of life?"
+
+        default_response = self.admin.get_response(question)
+        self.assertEqual(default_response, "No response available")
+
+        self.admin.provide_answer(question, "The meaning of life is 42.")
+        response = self.admin.get_response(question)
+        self.assertEqual(response, "The meaning of life is 42.")
+
+    def test_get_unanswered_queries(self):
+        """
+        Test the get_unanswered_queries method of the Admin class.
+        """
+        self.assertEqual(self.admin.get_unanswered_queries(), [])
+
+        self.admin.provide_answer("Question 1", "Answer 1")
+        self.admin.provide_answer("Question 2", "Answer 2")
+        unanswered_queries = self.admin.get_unanswered_queries()
+        self.assertEqual(unanswered_queries, ["Question 1", "Question 2"])
+
+    def test_mark_resolved(self):
+        """
+        Test the mark_resolved method of the Admin class.
+        """
+        question = "To be resolved"
+
+        self.admin.provide_answer(question, "Resolved answer")
+        self.assertIn(question, self.admin.unanswered_queries)
+
+        self.admin.mark_resolved(question)
+        self.assertNotIn(question, self.admin.unanswered_queries)
+
+
+if __name__ == '__main__':
     unittest.main()
