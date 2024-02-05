@@ -144,4 +144,3 @@ class Admin:
             # Log the exception and mark the query as unresolved
             self.log.error(f"Error forwarding query '{q}': {e}")
             self.unanswered_queries[q] = "Error forwarding to admin. Please try again."
-
