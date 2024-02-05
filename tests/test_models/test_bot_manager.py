@@ -40,16 +40,16 @@ class TestAdmin(unittest.TestCase):
         """
         Test the provide_answer method of the Admin class.
         """
-        question = "What is the capital of France?"
-        answer = "The capital of France is Paris."
+        q = "What is the capital of France?"
+        a = "The capital of France is Paris."
 
-        self.admin.provide_answer(question, answer)
+        self.admin.provide_answer(q, a)
 
-        self.assertIn(question, self.bot.database)
-        self.assertEqual(self.bot.database[question], answer)
+        self.assertIn(q, self.bot.db)
+        self.assertEqual(self.bot.db[q], a)
 
-        self.assertIn(question, self.admin.unanswered_queries)
-        self.assertEqual(self.admin.unanswered_queries[question], answer)
+        self.assertIn(q, self.admin.unanswered_queries)
+        self.assertEqual(self.admin.unanswered_queries[q], a)
 
     def test_has_unanswered_queries(self):
         """
@@ -64,14 +64,14 @@ class TestAdmin(unittest.TestCase):
         """
         Test the get_response method of the Admin class.
         """
-        question = "What is the meaning of life?"
+        q = "What is the capital city of Kenya?"
 
-        default_response = self.admin.get_response(question)
-        self.assertEqual(default_response, "No response available")
+        default_response = self.admin.get_response(q)
+        self.assertEqual(default_response, "I don't have an answer for that, sorry.")
 
-        self.admin.provide_answer(question, "The meaning of life is 42.")
-        response = self.admin.get_response(question)
-        self.assertEqual(response, "The meaning of life is 42.")
+        self.admin.provide_answer(q, "The capital city of Kenya is Nairobi.")
+        response = self.admin.get_response(q)
+        self.assertEqual(response, "The capital city of Kenya is Nairobi.")
 
     def test_get_unanswered_queries(self):
         """
@@ -88,13 +88,13 @@ class TestAdmin(unittest.TestCase):
         """
         Test the mark_resolved method of the Admin class.
         """
-        question = "To be resolved"
+        q = "To be resolved"
 
-        self.admin.provide_answer(question, "Resolved answer")
-        self.assertIn(question, self.admin.unanswered_queries)
+        self.admin.provide_answer(q, "Resolved answer")
+        self.assertIn(q, self.admin.unanswered_queries)
 
-        self.admin.mark_resolved(question)
-        self.assertNotIn(question, self.admin.unanswered_queries)
+        self.admin.mark_resolved(q)
+        self.assertNotIn(q, self.admin.unanswered_queries)
 
 
 if __name__ == '__main__':
