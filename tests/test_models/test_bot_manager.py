@@ -130,7 +130,7 @@ class TestAdmin(unittest.TestCase):
         # Mock the smtplib.SMTP class and its methods to simulate an exception during email sending
         with patch("smtplib.SMTP") as mock_smtp:
             mock_smtp_instance = mock_smtp.return_value.__enter__.return_value
-            mock_smtp_instance.side_effect = Exception("Email sending failed")
+            mock_smtp_instance.sendmail.side_effect = Exception("Email sending failed")
 
             # Create an instance of RuleBasedBot (you can mock it if needed)
             bot_mock = MagicMock()
