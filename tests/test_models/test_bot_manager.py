@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Test for the bot manager.py file """
 import unittest
+import smtplib
 from unittest.mock import patch, MagicMock
 from models.bot_manager import RuleBasedBot, Admin
 
