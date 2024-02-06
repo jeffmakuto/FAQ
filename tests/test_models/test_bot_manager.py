@@ -23,9 +23,36 @@ class TestRuleBasedBot(unittest.TestCase):
     def test_unknown_query(self):
         """ Test response for an unknown question not in the database """
         unknown_query = "Is there a legal department at Kenya Airways?"
-        response = self.bot.respond(unknown_query)
+
+        # Mock the admin instance
+        admin_instance = MagicMock()
+
+        # Call the respond method
+        response = self.bot.respond(
+            unknown_query,
+            admin_instance,
+            "smtp_server",
+            587,
+            "sender_email",
+            "sender_password",
+            "recipient_email"
+        )
+
+        # Assert the response
         self.assertEqual(response, "I don't have an answer for that, sorry.")
+
+        # Assert that the user input is added to the database
         self.assertIn(unknown_query, self.bot.db)
+
+        # Assert that the forward_query_to_admin method is called
+        admin_instance.forward_query_to_admin.assert_called_once_with(
+            unknown_query,
+            "smtp_server",
+            587,
+            "sender_email",
+            "sender_password",
+            "recipient_email"
+        )
 
 
 class TestAdmin(unittest.TestCase):
