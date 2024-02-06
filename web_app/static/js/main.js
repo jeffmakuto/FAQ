@@ -19,7 +19,7 @@ function sendMessage() {
     chatContainer.innerHTML += `<div class="message">User: ${userInput}</div>`;
 
     /* Send user input to Flask backend */
-    fetch('/api/bot', {
+    fetch('/api/v1/bot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
