@@ -19,7 +19,7 @@ class TestRuleBasedBot(unittest.TestCase):
     def test_known_query(self):
         """ Test response for a known question in the database """
         # Mock the additional parameters needed for respond method
-        admin_instance = MagicMock()
+        admin_instance = Mock()
         smtp_server = "mock_server"
         smtp_port = 587
         sender_email = "mock_sender@example.com"
@@ -42,7 +42,7 @@ class TestRuleBasedBot(unittest.TestCase):
         unknown_query = "Is there a legal department at Kenya Airways?"
 
         # Mock the admin instance
-        admin_instance = MagicMock()
+        admin_instance = Mock()
 
         # Call the respond method
         response = self.bot.respond(
