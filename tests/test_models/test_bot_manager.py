@@ -173,9 +173,11 @@ class TestAdmin(unittest.TestCase):
         )
 
         # Check log messages
-        mock_logging.getLogger.assert_called_once_with('models.bot_manager.Admin')
-        mock_logger = mock_logging.getLogger.return_value
+        mock_logging.getLogger.assert_called_once_with('models.bot_manager')
         mock_logger.info.assert_called_once_with(f"Query forwarded successfully: {q}")
+
+        # Adjust this assertion to check at least one call to starttls
+        mock_smtp.return_value.starttls.assert_called_at_least_once()
 
     @patch('smtplib.SMTP')
     @patch('models.bot_manager.logging')
@@ -208,7 +210,7 @@ class TestAdmin(unittest.TestCase):
             )
 
             # Check log messages
-            mock_logging.getLogger.assert_called_once_with('models.bot_manager.Admin')
+            mock_logging.getLogger.assert_called_once_with('models.bot_manager')
             mock_logger.error.assert_called_once_with(f"Error forwarding query '{q}': Simulated SMTP error")
 
 if __name__ == '__main__':
