@@ -150,7 +150,7 @@ class Admin:
                     # Log successful email forwarding
                     self.log.info(f"Query forwarded successfully: {q}")
 
-                    # Always add the query to unanswered_queries before attempting email forwarding
+                    # Add the query to unanswered_queries only if forwarding is successful
                     self.unanswered_queries[q] = "Forwarded to admin's email. Waiting for response."
 
         except Exception as e:
