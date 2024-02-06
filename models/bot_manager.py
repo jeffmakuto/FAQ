@@ -21,16 +21,29 @@ class RuleBasedBot:
         """ Adds the new query to the database """
         self.db[q] = a
 
-    def respond(self, user_input):
+    def respond(self, user_input, admin_instance, smtp_server, smtp_port, sender_email, sender_password, recipient_email):
         """
-        Checks if an aswer is provided in the db and responds
-        If the response isn't found it writes a custom message
-        to inform the user response isn't available
+        Checks if an answer is provided in the db and responds.
+        If the response isn't found, it adds the query to the database,
+        then forwards it to the admin and marks it as unresolved.
+
+        Parameters:
+        - user_input (str): The user's input.
+        - admin_instance (Admin): An instance of the Admin class.
+        - smtp_server (str): SMTP server address.
+        - smtp_port (int): SMTP server port.
+        - sender_email (str): Bot's email address.
+        - sender_password (str): Bot's email password.
+        - recipient_email (str): Admin's email address.
+
+        Returns:
+        - str: The bot's response.
         """
         if user_input in self.db:
             return self.db[user_input]
         else:
-            self.add_to_db(user_input, "Hello admin, please reply to the query. Thank you")
+            self.add_to_db(user_input, "Forwarded to admin's email. Waiting for response.")
+            admin_instance.forward_query_to_admin(user_input, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
             return "I don't have an answer for that, sorry."
 
 
@@ -117,9 +130,6 @@ class Admin:
         """
         try:
             if q not in self.unanswered_queries:
-                # Only forward if the question is not already marked as unresolved
-                self.unanswered_queries[q] = "Forwarded to admin's email. Waiting for response."
-
                 # Create MIMEText object
                 msg = MIMEText(f"The bot received a new query:\n\n{q}\n\nPlease respond to the user.")
                 msg["Subject"] = "New Query: " + q
