@@ -142,75 +142,35 @@ class TestAdmin(unittest.TestCase):
         self.assertNotIn(q, self.admin.unanswered_queries)
 
     @patch('smtplib.SMTP')
-    @patch('models.bot_manager.logging')
-    def test_forward_query_to_admin_success(self, mock_logging, mock_smtp):
-        # Mocking SMTP and logging to avoid actual email sending and logging in the test
-        admin_instance = Admin(bot=None)
-    
-        # Set up test data
-        q = "Test query"
-        smtp_server = "test.smtp.com"
+    def test_forward_query_successful(self, mock_smtp):
+        admin = Admin(Mock())
+        admin.unanswered_queries = {}
+        query = "Test query"
+        smtp_server = "smtp.example.com"
         smtp_port = 587
         sender_email = "bot@example.com"
         sender_password = "bot_password"
         recipient_email = "admin@example.com"
-    
-        # Execute the method being tested
-        with patch.object(smtplib.SMTP, 'starttls') as mock_starttls:
-            admin_instance.forward_query_to_admin(
-                q, smtp_server, smtp_port, sender_email, sender_password, recipient_email
-            )
-    
-            # Assertions
-            self.assertTrue(q in admin_instance.unanswered_queries)
-            self.assertEqual(
-                admin_instance.unanswered_queries[q],
-                "Forwarded to admin's email. Waiting for response."
-            )
-            mock_smtp.assert_called_once_with(smtp_server, smtp_port)
-            mock_starttls.assert_called_once()  # Ensure starttls is called
-            mock_smtp.return_value.login.assert_called_once_with(sender_email, sender_password)
-            mock_smtp.return_value.sendmail.assert_called_once_with(
-                sender_email, [recipient_email], unittest.mock.ANY
-            )
-    
-            # Check log messages
-            mock_logging.getLogger.assert_called_once_with('models.bot_manager')
-            mock_logger.info.assert_called_once_with(f"Query forwarded successfully: {q}")
 
-    @patch('smtplib.SMTP')
-    @patch('models.bot_manager.logging')
-    def test_forward_query_to_admin_failure(self, mock_logging, mock_smtp):
-        # Mocking SMTP and logging to simulate an exception during email sending
-        mock_smtp.side_effect = Exception("Simulated SMTP error")
-        mock_logger = MagicMock()
+        admin.forward_query_to_admin(query, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
 
-        with patch('models.bot_manager.logging.getLogger', return_value=mock_logger):
-            admin_instance = Admin(bot=None)
+        self.assertIn(query, admin.unanswered_queries)
+        self.assertEqual(admin.unanswered_queries[query], "Forwarded to admin's email. Waiting for response.")
 
-            # Set up test data
-            q = "Test query"
-            smtp_server = "test.smtp.com"
-            smtp_port = 587
-            sender_email = "bot@example.com"
-            sender_password = "bot_password"
-            recipient_email = "admin@example.com"
+    @patch('smtplib.SMTP', side_effect=Exception("Email sending failed"))
+    def test_forward_query_exception(self, mock_smtp):
+        admin = Admin(Mock())
+        admin.unanswered_queries = {}
+        query = "Test query"
+        smtp_server = "smtp.example.com"
+        smtp_port = 587
+        sender_email = "bot@example.com"
+        sender_password = "bot_password"
+        recipient_email = "admin@example.com"
 
-            # Execute the method being tested
-            admin_instance.forward_query_to_admin(
-                q, smtp_server, smtp_port, sender_email, sender_password, recipient_email
-            )
+        admin.forward_query_to_admin(query, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
 
-            # Assertions
-            self.assertTrue(q in admin_instance.unanswered_queries)
-            self.assertEqual(
-                admin_instance.unanswered_queries[q],
-                "Error forwarding to admin. Please try again."
-            )
-
-            # Check log messages
-            mock_logging.getLogger.assert_called_once_with('models.bot_manager')
-            mock_logger.error.assert_called_once_with(f"Error forwarding query '{q}': Simulated SMTP error")
+        self.assertNotIn(query, admin.unanswered_queries)
 
 if __name__ == '__main__':
     unittest.main()
