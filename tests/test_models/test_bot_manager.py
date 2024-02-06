@@ -2,7 +2,7 @@
 """ Test for the bot manager.py file """
 import unittest
 import smtplib
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, Mock
 from models.bot_manager import RuleBasedBot, Admin
 
 class TestRuleBasedBot(unittest.TestCase):
