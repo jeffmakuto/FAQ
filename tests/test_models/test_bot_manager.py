@@ -17,7 +17,23 @@ class TestRuleBasedBot(unittest.TestCase):
 
     def test_known_query(self):
         """ Test response for a known question in the database """
-        response = self.bot.respond(self.known_question)
+        # Mock the additional parameters needed for respond method
+        admin_instance = MagicMock()
+        smtp_server = "mock_server"
+        smtp_port = 587
+        sender_email = "mock_sender@example.com"
+        sender_password = "mock_password"
+        recipient_email = "mock_recipient@example.com"
+
+        response = self.bot.respond(
+            self.known_question,
+            admin_instance,
+            smtp_server,
+            smtp_port,
+            sender_email,
+            sender_password,
+            recipient_email
+        )
         self.assertEqual(response, self.known_answer)
 
     def test_unknown_query(self):
