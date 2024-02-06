@@ -129,6 +129,9 @@ class Admin:
         - recipient_email (str): Admin's email address.
         """
         try:
+            # Always add the query to unanswered_queries before attempting email forwarding
+            self.unanswered_queries[q] = "Forwarded to admin's email. Waiting for response."
+
             if q not in self.unanswered_queries:
                 # Create MIMEText object
                 msg = MIMEText(f"The bot received a new query:\n\n{q}\n\nPlease respond to the user.")
