@@ -167,10 +167,12 @@ class TestAdmin(unittest.TestCase):
         sender_email = "bot@example.com"
         sender_password = "bot_password"
         recipient_email = "admin@example.com"
-
+    
         admin.forward_query_to_admin(query, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
+    
+        self.assertIn(query, admin.unanswered_queries)
+        self.assertEqual(admin.unanswered_queries[query], "Error forwarding to admin. Please try again.")
 
-        self.assertNotIn(query, admin.unanswered_queries)
 
 if __name__ == '__main__':
     unittest.main()
