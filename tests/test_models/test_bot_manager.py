@@ -141,7 +141,7 @@ class TestAdmin(unittest.TestCase):
         self.assertNotIn(q, self.admin.unanswered_queries)
 
     @patch('smtplib.SMTP')
-    @patch('bot_manager.logging')
+    @patch('models.bot_manager.logging')
     def test_forward_query_to_admin_success(self, mock_logging, mock_smtp):
         # Mocking SMTP and logging to avoid actual email sending and logging in the test
         admin_instance = Admin(bot=None)
@@ -173,18 +173,18 @@ class TestAdmin(unittest.TestCase):
         )
 
         # Check log messages
-        mock_logging.getLogger.assert_called_once_with('bot_manager.Admin')
+        mock_logging.getLogger.assert_called_once_with('models.bot_manager.Admin')
         mock_logger = mock_logging.getLogger.return_value
         mock_logger.info.assert_called_once_with(f"Query forwarded successfully: {q}")
 
     @patch('smtplib.SMTP')
-    @patch('bot_manager.logging')
+    @patch('models.bot_manager.logging')
     def test_forward_query_to_admin_failure(self, mock_logging, mock_smtp):
         # Mocking SMTP and logging to simulate an exception during email sending
         mock_smtp.side_effect = Exception("Simulated SMTP error")
         mock_logger = MagicMock()
 
-        with patch('bot_manager.logging.getLogger', return_value=mock_logger):
+        with patch('models.bot_manager.logging.getLogger', return_value=mock_logger):
             admin_instance = Admin(bot=None)
 
             # Set up test data
@@ -208,7 +208,7 @@ class TestAdmin(unittest.TestCase):
             )
 
             # Check log messages
-            mock_logging.getLogger.assert_called_once_with('bot_manager.Admin')
+            mock_logging.getLogger.assert_called_once_with('models.bot_manager.Admin')
             mock_logger.error.assert_called_once_with(f"Error forwarding query '{q}': Simulated SMTP error")
 
 if __name__ == '__main__':
