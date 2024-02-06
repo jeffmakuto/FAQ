@@ -2,6 +2,10 @@
 """ Flask Blueprint for implementing FAQ Bot's logic """
 from . import app_blueprints
 from flask import jsonify, render_template, request
+from models.bot_manager import RuleBasedBot, Admin
+
+bot_instance = RuleBasedBot()
+admin_instance = Admin(bot_instance)
 
 
 @app_blueprints.route('/home')
@@ -19,7 +23,6 @@ def bot():
 
     """
     user_input = request.json.get('user_input')
-
-    bot_response = "Thanks for reaching out!"
-
+    bot_response = bot_instance.respond(user_input, admin_instance,
+            smtp_server, smtp_port, sender_email, sender_password, recipient_email)
     return jsonify({'bot_response': bot_response})
