@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,17 +15,16 @@
         <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
             <div class="header"> Chatty!!!</div>
             <div class="message-container">
-                <!-- Chat messages go here -->
+                <div v-for="(msg, index) in messages" :key="index" class="message">{{ msg }}</div>
             </div>
             <div class="input-container">
                 <input v-model="message" placeholder="Type your message...">
-                <button @click="sendMessage">Send</button>
+                <button class="send-btn" @click="sendMessage">Send</button>
             </div>
-            <button @click="toggleChatBoxSize">&#8597;</button>
+            <button class="toggle-btn" @click="toggleChatBoxSize">&#8597;</button>
         </div>
     </div>
 
     <script src="app.js"></script>
 </body>
 </html>
-
