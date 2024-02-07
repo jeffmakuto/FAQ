@@ -22,16 +22,6 @@ h2 {
     padding: 10px;
 }
 
-.chatbox button {
-    position:absolute;
-    top: 5px;
-    right: 5px;
-    transform: rotate(45deg);
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
 .enlarged {
     width: 600px;
     height: 300px;
@@ -61,6 +51,10 @@ h2 {
     align-items: flex-end;
     padding: 10px;
     border-top: 1px solid #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 input {
@@ -73,12 +67,23 @@ input {
     margin-top: auto;
 }
 
-button {
+.send-btn {
     padding: 8px 15px;
     background-color: #4CAF50;
-    color: white;
+    position:absolute;
+    bottom: 7px;
+    right: 7px;
     border: none;
-    border-radius: 5px;
+    background-color: transparent;
     cursor: pointer;
-    font-size: 14px;
+}
+
+.toggle-btn {
+    position:absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transform: rotate(45deg);
 }
