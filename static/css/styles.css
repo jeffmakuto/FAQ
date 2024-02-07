@@ -1,0 +1,84 @@
+h1, h2 {
+    text-align: center;
+}
+h1 {
+    color: black;
+}
+
+h2 {
+    color: blue;
+}
+
+.chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 200px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.chatbox button {
+    position:absolute;
+    top: 5px;
+    right: 5px;
+    transform: rotate(45deg);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.enlarged {
+    width: 600px;
+    height: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.message-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.input-container {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}

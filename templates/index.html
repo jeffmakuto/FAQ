@@ -4,12 +4,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ Bot</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <h1>Ethics & Integrity</h1>
+    <h2>Assistive FAQ Bot</h2>
 
     <div id="app">
-        <h2>{{ title }}</h2>
+        <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
+            <div class="header"> Chatty!!!</div>
+            <div class="message-container">
+                <!-- Chat messages go here -->
+            </div>
+            <div class="input-container">
+                <input v-model="message" placeholder="Type your message...">
+                <button @click="sendMessage">Send</button>
+            </div>
+            <button @click="toggleChatBoxSize">&#8597;</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
