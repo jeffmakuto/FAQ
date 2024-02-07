@@ -2,7 +2,8 @@ const app = Vue.createApp({
     data() {
         return {
             isChatBoxEnlarged: false,
-            message: ""
+            message: "",
+            messages: [] /* Array to store old messages */
         };
     },
 
@@ -13,7 +14,8 @@ const app = Vue.createApp({
 
         sendMessage() {
             /* Implement logic to handle the sent message */
-            console.log("Message sent:", this.message);
+            /* Add the message to the messages array */
+            this.messages.push(this.message);
             /* Clear the input field */
             this.message = "";
         }
@@ -22,4 +24,3 @@ const app = Vue.createApp({
 
 
 app.mount('#app');
-
