@@ -3,7 +3,8 @@ const app = Vue.createApp({
         return {
             isChatBoxEnlarged: false,
             message: "",
-            messages: [] /* Array to store old messages */
+            bota: "Hello! my name is Bota! How may I be of help today?",
+            messages: [] /* Array to store messages */
         };
     },
 
@@ -13,14 +14,27 @@ const app = Vue.createApp({
         },
 
         sendMessage() {
-            /* Implement logic to handle the sent message */
-            /* Add the message to the messages array */
-            this.messages.push(this.message);
+            const userMessage = { text: "You: " + this.message, isUser: true };
+            const botReply = { text: "Bota: " + this.bota, isUser: false };
+
+            this.messages.push(userMessage);
+            this.messages.push(botReply);
+
+            /* Scroll to the bottom after adding a new message */
+            this.$nextTick(() => {
+                const container = this.$refs.messageContainer;
+                container.scrollTop = container.scrollHeight;
+            });
+
             /* Clear the input field */
             this.message = "";
+        },
+
+        clearChat() {
+            /* Clear all messages */
+            this.messages = [];
         }
     }
 });
-
 
 app.mount('#app');
