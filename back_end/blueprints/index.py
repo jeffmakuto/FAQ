@@ -3,6 +3,7 @@
 from . import app_blueprints
 from flask import jsonify, render_template, request
 from models.bot_manager import RuleBasedBot, Admin
+from config import *
 
 bot_instance = RuleBasedBot()
 admin_instance = Admin(bot_instance)
