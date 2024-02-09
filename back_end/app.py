@@ -8,8 +8,8 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # Configure templates and static folders for the web application
-app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'templates'))
-app.static_folder= os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'static'))
+app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'front_end', 'templates'))
+app.static_folder= os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'front_end', 'static'))
 
 # Register blueprint
 app.register_blueprint(app_blueprints)
