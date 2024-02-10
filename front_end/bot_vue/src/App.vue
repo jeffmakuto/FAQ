@@ -1,6 +1,6 @@
 <template>
-  <HelloWorld msg="Ethics & integrity"/>
-  <img alt="Vue logo" src="./assets/logo.png">
+	<h1>Ethics & Integrity</h1>
+	<img alt="Vue logo" src="./assets/logo.png">
 </template>
 
 <script>
@@ -78,16 +78,9 @@ export default {
   margin-top: 60px;
 }
 
-h1, h2 {
-    text-align: center;
-}
-
 h1 {
+    text-align: center;
     color: black;
-}
-
-h2 {
-    color: blue;
 }
 
 .chatbox {
