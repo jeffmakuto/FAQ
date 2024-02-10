@@ -12,6 +12,7 @@ export default {
 	components: {
 		Bot
 	}
+}
 </script>
 
 <style>
