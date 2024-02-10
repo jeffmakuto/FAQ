@@ -30,26 +30,27 @@ export default {
 			messages: [] /* Array to store messages */
 		};
 	},
-
+	
 	methods: {
 		toggleChatBoxSize() {
 			this.isChatBoxEnlarged = !this.isChatBoxEnlarged;
 		},
-
+		
 		sendMessage() {
 			/* Check if the user input is "Hi" */
 			if (this.message.trim().toLowerCase() === 'hi') {
 				const userMessage = { text: "You: " + this.message, isUser: true };
 				const botReply = { text: "Bota: Hello! How may I be of help today?", isUser: false };
+				
 				this.messages.push(userMessage);
 				this.messages.push(botReply);
-
+				
 				/* Scroll to the bottom after adding a new message */
 				this.$nextTick(() => {
 					const container = this.$refs.messageContainer;
 					container.scrollTop = container.scrollHeight;
 				});
-
+				
 				/* Clear the input field */
 				this.message = "";
 			} else {
@@ -58,7 +59,7 @@ export default {
 					.then(response => {
 						const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
 						this.messages.push(botReply);
-
+						
 						/* Scroll to the bottom after adding a new message */
 						this.$nextTick(() => {
 							const container = this.$refs.messageContainer;
@@ -68,12 +69,12 @@ export default {
 					.catch(error => {
 						console.error('Error communicating with the backend:', error);
 					});
-
+				
 				/* Clear the input field */
 				this.message = "";
 			}
 		},
-
+		
 		clearChat() {
 			/* Clear all messages */
 			this.messages = [];
