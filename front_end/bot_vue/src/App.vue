@@ -1,9 +1,26 @@
 <template>
-	<h1>Ethics & Integrity</h1>
-	<img alt="Vue logo" src="./assets/logo.png">
+  <div>
+    <h1>Ethics & Integrity</h1>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
+      <div class="header">Bota(:-)</div>
+      <div class="message-container" ref="messageContainer">
+        <div v-for="(msg, index) in messages.slice().reverse()" :key="index" class="message" :class="{ 'user-message': msg.isUser }">
+          {{ msg.text }}
+        </div>
+      </div>
+      <div class="input-container">
+        <input v-model="message" @keyup.enter="sendMessage" placeholder="Type your message...">
+        <button class="send-btn" @click="sendMessage">Send</button>
+        <button class="clear-btn" @click="clearChat">Clear</button>
+      </div>
+      <button class="toggle-btn" @click="toggleChatBoxSize">&#8597;</button>
+    </div>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'App',
