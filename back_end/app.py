@@ -7,14 +7,10 @@ app = Flask(__name__)
 
 app.config.from_object(__name__)
 
-CORS(app, resources={r"/*":{'origins': "http://35.174.207.200:8080"}})
+CORS(app, resources={r"/*":{'origins':'*'}})
 
 # Global strict slashes
 app.url_map.strict_slashes = False
-
-# Configure templates and static folders for the web application
-app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'front_end', 'bot_vue', 'public'))
-app.static_folder= os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'front_end', 'bot_vue', 'src'))
 
 # Register blueprint
 app.register_blueprint(app_blueprints)
