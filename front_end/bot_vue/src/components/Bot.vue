@@ -55,7 +55,7 @@ export default {
 				this.message = "";
 			} else {
 				/* Send user input to the backend */
-				axios.post('/bot', { user_input: this.message })
+				axios.post('http://localhost/bot', { user_input: this.message })
 					.then(response => {
 						const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
 						this.messages.push(botReply);
