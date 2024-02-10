@@ -1,4 +1,5 @@
-/* Import Axios */
+/* Imports */
+import { createApp } from 'vue'
 import axios from 'axios';
 
 const app = Vue.createApp({
