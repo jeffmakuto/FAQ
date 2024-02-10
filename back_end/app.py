@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app.config.from_object(__name__)
 
-CORS(app, resources={r"/*":{'origins':}})
+CORS(app, resources={r"/*":{'origins': "http://35.174.207.200:8080"}})
 
 # Global strict slashes
 app.url_map.strict_slashes = False
