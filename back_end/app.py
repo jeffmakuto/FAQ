@@ -12,10 +12,6 @@ CORS(app, resources={r"/*":{'origins':'*'}})
 # Global strict slashes
 app.url_map.strict_slashes = False
 
-# Configure templates and static folders for the web application
-app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'templates'))
-app.static_folder= os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'web_app', 'static'))
-
 # Register blueprint
 app.register_blueprint(app_blueprints)
 
