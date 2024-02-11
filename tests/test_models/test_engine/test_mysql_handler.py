@@ -2,8 +2,9 @@ import unittest
 from unittest.mock import patch, Mock
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from back_end.models.engine.mysql_handler import MySQLHandler, Query
+from back_end.models.engine.mysql_handler import MySQLHandler
 from back_end.models.engine.db_config import my_db_config
+from sqlalchemy.ext.declarative import Base
 
 class TestMySQLHandler(unittest.TestCase):
     """
