@@ -50,14 +50,14 @@ export default {
 		sendMessage() {
 			/* Get the user's message */
 			const userMessage = { text: "You: " + this.message, isUser: true };
-			this.messages.unshift(userMessage);
+			this.messages.push(userMessage);
 
 			/* Send the user's message to the backend */
 			axios.post(`${baseURL}/send_message`, { message: this.message })
 				.then(response => {
 					/* Get the bot's response */
 					const botMessage = { text: "Bota: " + response.data.message, isUser: false };
-					this.messages.unshift(botMessage);
+					this.messages.push(botMessage);
 				})
 				.catch(error => {
 					console.error('There was an error!', error);
