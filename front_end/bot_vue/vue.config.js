@@ -4,6 +4,9 @@ module.exports = defineConfig({
 	devServer: {
 		host: '0.0.0.0',
 		port: 8080,
+		https: true,
+		key: path.resolve(__dirname, 'key.pem'),
+		cert: path.resolve(__dirname, 'cert.pem'),
 	},
 	transpileDependencies: true,
 	chainWebpack: (config) => {
