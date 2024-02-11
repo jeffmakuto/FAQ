@@ -20,6 +20,9 @@
 <script>
 import axios from 'axios';
 
+/* Define the base URL for the backend API */
+const baseURL = 'http://localhost:5000';
+
 export default {
 	name: 'App',
 	data() {
@@ -30,61 +33,48 @@ export default {
 			messages: [] /* Array to store messages */
 		};
 	},
+
+	mounted() {
+		/* Display welcome message when the component is mounted */
+		const welcomeMessage = { text: "Bota: Hello there! I am Bota! How can I be of help today?", isUser: false };
+		this.messages.unshift(welcomeMessage);
+
+		/* Remove the welcome message after 3 seconds */
+		setTimeout(() => {
+			this.clearChat();
+		}, 3000);
+	},
 	
 	methods: {
+		/* Method to send a message */
+		sendMessage() {
+			/* Get the user's message */
+			const userMessage = { text: "You: " + this.message, isUser: true };
+			this.messages.unshift(userMessage);
+
+			/* Send the user's message to the backend */
+			axios.post(`${baseURL}/send_message`, { message: this.message })
+				.then(response => {
+					/* Get the bot's response */
+					const botMessage = { text: "Bota: " + response.data.message, isUser: false };
+					this.messages.unshift(botMessage);
+				})
+				.catch(error => {
+					console.error('There was an error!', error);
+				});
+
+			/* Clear the input field */
+			this.message = "";
+		},
+
+		/* Method to clear the chat */
+		clearChat() {
+			this.messages = [];
+		},
+
+		/* Method to toggle the chat box size */
 		toggleChatBoxSize() {
 			this.isChatBoxEnlarged = !this.isChatBoxEnlarged;
-		},
-		
-		sendMessage() {
-			/* Check if the user input is "Hi" */
-			if (this.message.trim().toLowerCase() === 'hi') {
-				const userMessage = { text: "You: " + this.message, isUser: true };
-				const botReply = { text: "Bota: Hello! How may I be of help today?", isUser: false };
-				
-				this.messages.push(userMessage);
-				this.messages.push(botReply);
-				
-				/* Scroll to the bottom after adding a new message */
-				this.$nextTick(() => {
-					const container = this.$refs.messageContainer;
-					container.scrollTop = container.scrollHeight;
-				});
-				
-				/* Clear the input field */
-				this.message = "";
-			} else {
-				
-				/* Display user's message */
-				const userMessage = { text: "You: " + this.message, isUser: true };
-				this.messages.push(userMessage);
-				
-				/* Send user input to the backend */
-				axios.post('http://localhost:5000/bot', { user_input: this.message })
-					.then(response => {
-
-						/* Display bot's reply */
-						const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
-						this.messages.push(botReply);
-
-						/* Scroll to the bottom after adding a new message */
-						this.$nextTick(() => {
-							const container = this.$refs.messageContainer;
-							container.scrollTop = container.scrollHeight;
-						});
-					})
-					.catch(error => {
-						console.error('Error communicating with the backend:', error);
-					});
-				
-				/* Clear the input field */
-				this.message = "";
-			}
-		},
-		
-		clearChat() {
-			/* Clear all messages */
-			this.messages = [];
 		}
 	}
 }
