@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<h1>Ethics & Integrity</h1>
-		<img alt="Ethics logo" src="./assets/logo.png">
 		<Bot/>
 	</div>
 </template>
