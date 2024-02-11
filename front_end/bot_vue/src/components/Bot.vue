@@ -52,11 +52,11 @@ export default {
 			this.messages.push(userMessage);
 
 			/* Send the user's message to the backend */
-			axios.post(`${baseURL}/bot`, { message: this.message })
+			axios.post(`${baseURL}/bot`, { user_input: this.message })
 				.then(response => {
 					/* Get the bot's response */
-					const botMessage = { text: "Bota: " + response.data.message, isUser: false };
-					this.messages.push(botMessage);
+					const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
+					this.messages.push(botReply);
 				})
 				.catch(error => {
 					console.error('There was an error!', error);
