@@ -28,8 +28,7 @@ export default {
 	data() {
 		return {
 			isChatBoxEnlarged: false,
-			message: "",
-			bota: "Hello! my name is Bota! How may I be of help today?",
+			message: "", /* Variable to store the user's message */
 			messages: [] /* Array to store messages */
 		};
 	},
@@ -53,7 +52,7 @@ export default {
 			this.messages.push(userMessage);
 
 			/* Send the user's message to the backend */
-			axios.post(`${baseURL}/send_message`, { message: this.message })
+			axios.post(`${baseURL}/bot`, { message: this.message })
 				.then(response => {
 					/* Get the bot's response */
 					const botMessage = { text: "Bota: " + response.data.message, isUser: false };
