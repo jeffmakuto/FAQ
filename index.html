@@ -25,6 +25,14 @@
             object-fit: cover;
             max-height: 600px;
         }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            width: 100%;
+        }
 
         header h1 {
             position: absolute;
@@ -101,15 +109,17 @@
 <body>
     <header>
         <img alt="Ethics Logo" src="front_end/bot_vue/src/assets/logo.png">
-        <h1>Ethics and Integrity FAQ Bot</h1>
+        <div class="header-content">
+            <h1>Ethics and Integrity FAQ Bot</h1>
+        </div>
     </header>
 
     <nav>
         <ul>
             <li><a href="#executive-summary">Executive Summary</a></li>
-            <li><a href="#background">Background</a></li>
-            <li><a href="#objectives">Objectives</a></li>
-            <li><a href="#functionality">Functionality</a></li>
+            <li><a href="#key-features">Key Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#video-section">Demo of The Web App</a></li>
         </ul>
     </nav>
 
@@ -118,29 +128,67 @@
         <p>In the pursuit of fostering a culture of ethics and integrity within Kenya Airways, the Ethics and Integrity FAQ Bot is an innovative solution designed to guide employees through ethical decision-making.</p>
     </section>
 
-    <section id="background">
-        <h2>Background</h2>
-        <p><strong>Problem Statement:</strong> Kenya Airways faces the challenge of instilling a culture of ethics and integrity among its employees due to the absence of a centralized resource for addressing ethical concerns.</p>
-        <p><strong>Rationale:</strong> Addressing this challenge is crucial for maintaining the airline's reputation, compliance, employee satisfaction, and attracting stakeholders who prioritize ethical business conduct.</p>
+    <section id="key-features">
+        <h2>Key Features</h2>
+        
+        <!-- Feature 1 -->
+        <div class="feature">
+            <img src="path/to/feature1-image.jpg" alt="Feature 1 Image">
+            <h3>Feature 1 Name</h3>
+            <p>Description of Feature 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="feature">
+            <img src="path/to/feature2-image.jpg" alt="Feature 2 Image">
+            <h3>Feature 2 Name</h3>
+            <p>Description of Feature 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="feature">
+            <img src="path/to/feature3-image.jpg" alt="Feature 3 Image">
+            <h3>Feature 3 Name</h3>
+            <p>Description of Feature 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
     </section>
 
-    <section id="objectives">
-        <h2>Objectives</h2>
-        <p><strong>Primary Objective:</strong> To serve as a comprehensive and interactive tool offering guidance on ethical issues, dilemmas, and integrity-related concerns.</p>
-        <p><strong>Secondary Objectives:</strong></p>
-        <ul>
-            <li>Enhance employee understanding of Kenya Airways' Integrity code, mission, vision, and values.</li>
-            <li>Foster a proactive approach to ethical decision-making.</li>
-            <li>Establish a feedback loop for continuous improvement of the FAQ Bot's content and functionality.</li>
-        </ul>
+
+    <section id="about">
+        <h2>About</h2>
+        
+        <p>This project was inspired by a personal journey toward fostering a culture of ethics and integrity within organizations. Witnessing the positive impact that ethical decision-making had on both individuals and the overall work environment,
+        the idea of creating an innovative solution like the Ethics and Integrity FAQ Bot took root. It is not just a project for Holberton School; it is a passion-driven initiative to contribute to a better workplace
+        where integrity and ethics are paramount.</p>
+        <p>The project timeline reflects months of dedicated effort, balancing coursework and real-world application. As a Portfolio Project for Holberton School, this endeavor represents not only technical skills but a commitment
+        to values that go beyond code.</p>
+        
+        <h3>Meet the Team</h3>
+
+        <!-- Team Member 1 -->
+        <div class="team-member">
+            <h4>Team Member 1</h4>
+            <ul>
+                <li><a href="link/to/linkedin1" target="_blank">LinkedIn</a></li>
+                <li><a href="link/to/github1" target="_blank">GitHub</a></li>
+                <li><a href="link/to/twitter1" target="_blank">Twitter</a></li>
+            </ul>
+        </div>
+        
+        <h3>Project Repository</h3>
+        <p>Explore the codebase on GitHub: <a href="link/to/github-repo" target="_blank">GitHub Repository</a></p>
+    </section>
+    
+    <section id="video-section">
+        <h2>Project Video</h2>
+        
+        <!-- Replace "path/to/your/video.mp4" with the actual path to your video file -->
+        <video width="100%" height="auto" controls>
+            <source src="path/to/your/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </section>
 
-    <section id="functionality">
-        <h2>Functionality - Version 1</h2>
-        <p>On KQ World, there will be a section “Ethics and Integrity”, under the legal department. When anyone clicks that part, there’s a redirect to a new page just how the Ipride Internal button works. Once in the new page, no login or registration is required to ensure anonymity and privacy is achieved. To this extent, an obfuscation mechanism will be needed to ensure details associating a user to the KQ World is hidden. This allows employees to interact with the bot freely.</p>
-        <p>A page similar to the above will be displayed. Any mouse hovering over the Mission, Vision and Values will display the meaning of each. The page will also display upcoming Ethics and Integrity events and campaigns, and whistle–blowing contacts to use.</p>
-        <p>Whenever the page loads, the bot will be activated and display an initial greeting before allowing interactions with the employees accessing it. There will also be a maximize button that centers the bot and makes its chat box bigger.</p>
-    </section>
 
     <section>
         <h2>Continue Button</h2>
