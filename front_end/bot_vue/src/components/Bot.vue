@@ -54,12 +54,19 @@ export default {
 				/* Clear the input field */
 				this.message = "";
 			} else {
+				
+				/* Display user's message */
+				const userMessage = { text: "You: " + this.message, isUser: true };
+				this.messages.push(userMessage);
+				
 				/* Send user input to the backend */
 				axios.post('http://localhost:5000/bot', { user_input: this.message })
 					.then(response => {
+
+						/* Display bot's reply */
 						const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
 						this.messages.push(botReply);
-						
+
 						/* Scroll to the bottom after adding a new message */
 						this.$nextTick(() => {
 							const container = this.$refs.messageContainer;
