@@ -14,10 +14,45 @@
         }
 
         header {
-            background-color: #333;
-            color: white;
+            position: relative;
             text-align: center;
+            color: white;
+        }
+
+        header img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+        }
+
+        header h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        nav {
+            background-color: #333;
             padding: 1em;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         section {
@@ -29,18 +64,30 @@
             border-radius: 5px;
         }
 
-        h1 {
+        h1, h2 {
             color: #333;
         }
 
         h2 {
-            color: #333;
             border-bottom: 2px solid #333;
             padding-bottom: 0.5em;
         }
 
         p {
             color: #555;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
         }
 
         img {
@@ -52,22 +99,31 @@
 
 <body>
     <header>
+        <img alt="Ethics Logo" src="front_end/bot_vue/src/assets/logo.png">
         <h1>Ethics and Integrity FAQ Bot</h1>
-        <p>Empowering Kenya Airways Employees for Ethical Decision-Making</p>
     </header>
 
-    <section>
+    <nav>
+        <ul>
+            <li><a href="#executive-summary">Executive Summary</a></li>
+            <li><a href="#background">Background</a></li>
+            <li><a href="#objectives">Objectives</a></li>
+            <li><a href="#functionality">Functionality</a></li>
+        </ul>
+    </nav>
+
+    <section id="executive-summary">
         <h2>Executive Summary</h2>
         <p>In the pursuit of fostering a culture of ethics and integrity within Kenya Airways, the Ethics and Integrity FAQ Bot is an innovative solution designed to guide employees through ethical decision-making.</p>
     </section>
 
-    <section>
+    <section id="background">
         <h2>Background</h2>
         <p><strong>Problem Statement:</strong> Kenya Airways faces the challenge of instilling a culture of ethics and integrity among its employees due to the absence of a centralized resource for addressing ethical concerns.</p>
         <p><strong>Rationale:</strong> Addressing this challenge is crucial for maintaining the airline's reputation, compliance, employee satisfaction, and attracting stakeholders who prioritize ethical business conduct.</p>
     </section>
 
-    <section>
+    <section id="objectives">
         <h2>Objectives</h2>
         <p><strong>Primary Objective:</strong> To serve as a comprehensive and interactive tool offering guidance on ethical issues, dilemmas, and integrity-related concerns.</p>
         <p><strong>Secondary Objectives:</strong></p>
@@ -78,15 +134,14 @@
         </ul>
     </section>
 
-    <section>
+    <section id="functionality">
         <h2>Functionality - Version 1</h2>
-        <p>The Version 1 of the bot is rule-based. It can understand the context of questions asked and answer dynamically. For example, if a person wants to know what integrity is, they won’t need to ask the full question. A simple type-in “Integrity” will allow the bot to look for the answer the same way it would have if a person typed “What is Integrity?”</p>
-        <p>Moreover, any new question arising that the bot lacks an answer to, the bot will give a default answer and send the question asked to the Ethics and Integrity team, who on their end will see it as an email notification. The bot will then monitor if feedback to the question is available after every 24 hours and send a reminder to the team if it has not yet been addressed. Due to the sensitive nature of Ethics and Integrity matters, the manager will have exclusive access to queries and comments before they become accessible to other team members.</p>
+        <p>The Version 1 of the bot is rule-based. It can understand the context of questions asked and answer dynamically...</p>
     </section>
 
     <section>
         <h2>Continue Button</h2>
-        <button onclick="redirectToMainPage()">Continue</button>
+        <button onclick="redirectToMainPage()">Continue to Bot</button>
     </section>
 
     <script>
