@@ -1,105 +1,78 @@
+#!/usr/bin/env python3
 import unittest
-from unittest.mock import patch, Mock
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from back_end.models.engine.mysql_handler import MySQLHandler
-from back_end.models.engine.db_config import my_db_config
-from sqlalchemy.ext.declarative import Base
+from unittest.mock import MagicMock, patch
+from mongo_db import MongoDBHandler
 
-class TestMySQLHandler(unittest.TestCase):
-    """
-    This module contains unit tests for the MySQLHandler class in your_module.
-    It focuses on testing the functionality of adding and retrieving queries from the MySQL database.
+class TestMongoDBHandler(unittest.TestCase):
 
-    Test Cases:
-    - test_add_to_db: Tests the addition of a new query to the database.
-    - test_get_from_db_existing_question: Tests retrieving an answer for an existing question.
-    - test_get_from_db_nonexistent_question: Tests retrieving an answer for a nonexistent question.
-    - test_init_with_db_config: Tests the initialization of MySQLHandler with a provided db_config.
-    - test_init_with_default_config: Tests the initialization of MySQLHandler with the default db_config.
-    """
+    @classmethod
+    def setUpClass(cls):
+        # Set up a test MongoDB database and collection for the class
+        cls.test_db_name = 'test_db'
+        cls.test_collection_name = 'test_collection'
+        cls.mongo_handler = MongoDBHandler(db_name=cls.test_db_name, collection_name=cls.test_collection_name)
 
-    def setUp(self):
+    def test_connection_successful(self):
         """
-        Set up the testing environment by creating an in-memory SQLite database and initializing MySQLHandler.
+        Test that the MongoDBHandler initializes successfully and establishes a connection to the MongoDB collection.
         """
-        engine = create_engine('sqlite:///:memory:')
-        Session = sessionmaker(bind=engine)
-        Base.metadata.create_all(bind=engine)
-        self.mysql_handler = MySQLHandler(db_config=my_db_config)
-        self.mysql_handler.Session = Session
+        self.assertIsNotNone(self.mongo_handler.collection)
+        self.assertIsInstance(self.mongo_handler.collection, MagicMock)
+        # Assuming that the MagicMock class is used for the MongoDB collection for testing purposes
 
-    def tearDown(self):
+    def test_add_to_db_successful(self):
         """
-        Clean up the testing environment by closing any open sessions.
+        Test the successful addition of a question and answer pair to the MongoDB collection.
         """
-        self.mysql_handler.Session.close()
+        question = 'Test question'
+        answer = 'Test answer'
 
-    def test_add_to_db(self):
-        """
-        Test adding a new query to the database.
-        """
-        question = "What is the answer?"
-        answer = "The answer is 42."
-        self.mysql_handler.add_to_db(question, answer)
+        with patch.object(self.mongo_handler.collection, 'insert_one', return_value=None) as mock_insert:
+            self.mongo_handler.add_to_db(question, answer)
+            mock_insert.assert_called_once_with({"question": question, "answer": answer})
 
-        # Check if the query is in the database
-        result = self.mysql_handler.get_from_db(question)
-        self.assertEqual(result, answer)
-
-    def test_get_from_db_existing_question(self):
+    def test_add_to_db_connection_not_established(self):
         """
-        Test retrieving an answer for an existing question.
+        Test that attempting to add a question and answer pair to the MongoDB collection fails when the connection
+        to the database is not established.
         """
-        question = "Existing question"
-        answer = "Existing answer"
-        self.mysql_handler.add_to_db(question, answer)
+        mongo_handler = MongoDBHandler(db_name='invalid_db', collection_name='invalid_collection')
+        with patch.object(mongo_handler.collection, 'insert_one') as mock_insert:
+            mongo_handler.add_to_db('Invalid question', 'Invalid answer')
+            mock_insert.assert_not_called()
 
-        result = self.mysql_handler.get_from_db(question)
-        self.assertEqual(result, answer)
-
-    def test_get_from_db_nonexistent_question(self):
+    def test_get_from_db_successful(self):
         """
-        Test retrieving an answer for a nonexistent question.
+        Test the successful retrieval of an answer for a given question from the MongoDB collection.
         """
-        question = "Nonexistent question"
-        result = self.mysql_handler.get_from_db(question)
-        self.assertIsNone(result)
+        question = 'Test question'
+        answer = 'Test answer'
+        mock_find_one = MagicMock(return_value={"question": question, "answer": answer})
+        with patch.object(self.mongo_handler.collection, 'find_one', mock_find_one):
+            result = self.mongo_handler.get_from_db(question)
+            mock_find_one.assert_called_once_with({"question": question})
+            self.assertEqual(result, answer)
 
-    @patch('your_module.create_engine')
-    @patch('your_module.Base.metadata.create_all')
-    def test_init_with_db_config(self, mock_create_all, mock_create_engine):
+    def test_get_from_db_connection_not_established(self):
         """
-        Test initialization with a provided db_config.
+        Test that attempting to retrieve an answer from the MongoDB collection fails when the connection
+        to the database is not established.
         """
-        db_config = Mock()
-        self.mysql_handler = MySQLHandler(db_config=db_config)
+        mongo_handler = MongoDBHandler(db_name='invalid_db', collection_name='invalid_collection')
+        with patch.object(mongo_handler.collection, 'find_one') as mock_find_one:
+            result = mongo_handler.get_from_db('Invalid question')
+            mock_find_one.assert_not_called()
+            self.assertIsNone(result)
 
-        # Ensure create_engine is called with the correct arguments
-        mock_create_engine.assert_called_once_with(
-            f"mysql+pymysql://{db_config.user}:{db_config.password}@{db_config.host}:{db_config.port}/{db_config.database}",
-            echo=True,
-        )
-
-        # Ensure Base.metadata.create_all is called
-        mock_create_all.assert_called_once()
-
-    @patch('your_module.create_engine')
-    @patch('your_module.Base.metadata.create_all')
-    def test_init_with_default_config(self, mock_create_all, mock_create_engine):
+    def test_get_from_db_question_not_found(self):
         """
-        Test initialization with the default db_config.
+        Test that attempting to retrieve an answer for a non-existent question from the MongoDB collection
+        results in a None response.
         """
-        self.mysql_handler = MySQLHandler()
-
-        # Ensure create_engine is called with the correct arguments
-        mock_create_engine.assert_called_once_with(
-            f"mysql+pymysql://{my_db_config.user}:{my_db_config.password}@{my_db_config.host}:{my_db_config.port}/{my_db_config.database}",
-            echo=True,
-        )
-
-        # Ensure Base.metadata.create_all is called
-        mock_create_all.assert_called_once()
+        with patch.object(self.mongo_handler.collection, 'find_one', return_value=None) as mock_find_one:
+            result = self.mongo_handler.get_from_db('Non-existent question')
+            mock_find_one.assert_called_once_with({"question": 'Non-existent question'})
+            self.assertIsNone(result)
 
 if __name__ == '__main__':
     unittest.main()
