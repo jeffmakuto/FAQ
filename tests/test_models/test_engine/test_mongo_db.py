@@ -1,79 +1,90 @@
-#!/usr/bin/env python3
 import unittest
-from unittest.mock import MagicMock, patch
+from pymongo import MongoClient
 from back_end.models.engine.mongo_db import MongoDBHandler
 
 class TestMongoDBHandler(unittest.TestCase):
+    def setUp(self):
+        """Set up a test MongoDB connection for the tests."""
+        self.test_db_name = 'test_database'
+        self.test_collection_name = 'test_collection'
+        self.mongo_client = MongoClient('localhost', 27017)
+        self.mongo_db = self.mongo_client[self.test_db_name]
+        self.mongo_collection = self.mongo_db[self.test_collection_name]
 
-    @classmethod
-    def setUpClass(cls):
-        """ Set up a test MongoDB database and collection for the class """
-        cls.test_db_name = 'test_db'
-        cls.test_collection_name = 'test_collection'
-        cls.mongo_handler = MongoDBHandler(db_name=cls.test_db_name, collection_name=cls.test_collection_name)
+    def tearDown(self):
+        """Clean up the test database after the tests."""
+        self.mongo_client.drop_database(self.test_db_name)
 
-    def test_connection_successful(self):
-        """
-        Test that the MongoDBHandler initializes successfully and establishes a connection to the MongoDB collection.
-        """
-        self.assertIsNotNone(self.mongo_handler.collection)
-        self.assertIsInstance(self.mongo_handler.collection, MagicMock)
-        # Assuming that the MagicMock class is used for the MongoDB collection for testing purposes
+    def test_successful_connection(self):
+        """Test successful MongoDB connection."""
 
-    def test_add_to_db_successful(self):
-        """
-        Test the successful addition of a question and answer pair to the MongoDB collection.
-        """
-        question = 'Test question'
-        answer = 'Test answer'
+        handler = MongoDBHandler(self.test_db_name, self.test_collection_name)
 
-        with patch.object(self.mongo_handler.collection, 'insert_one', return_value=None) as mock_insert:
-            self.mongo_handler.add_to_db(question, answer)
-            mock_insert.assert_called_once_with({"question": question, "answer": answer})
+        self.assertIsNotNone(handler.collection)
 
-    def test_add_to_db_connection_not_established(self):
-        """
-        Test that attempting to add a question and answer pair to the MongoDB collection fails when the connection
-        to the database is not established.
-        """
-        mongo_handler = MongoDBHandler(db_name='invalid_db', collection_name='invalid_collection')
-        with patch.object(mongo_handler.collection, 'insert_one') as mock_insert:
-            mongo_handler.add_to_db('Invalid question', 'Invalid answer')
-            mock_insert.assert_not_called()
+    def test_failed_connection(self):
+        """Test failed MongoDB connection."""
 
-    def test_get_from_db_successful(self):
-        """
-        Test the successful retrieval of an answer for a given question from the MongoDB collection.
-        """
-        question = 'Test question'
-        answer = 'Test answer'
-        mock_find_one = MagicMock(return_value={"question": question, "answer": answer})
-        with patch.object(self.mongo_handler.collection, 'find_one', mock_find_one):
-            result = self.mongo_handler.get_from_db(question)
-            mock_find_one.assert_called_once_with({"question": question})
-            self.assertEqual(result, answer)
+        handler = MongoDBHandler('nonexistent_db', self.test_collection_name)
 
-    def test_get_from_db_connection_not_established(self):
-        """
-        Test that attempting to retrieve an answer from the MongoDB collection fails when the connection
-        to the database is not established.
-        """
-        mongo_handler = MongoDBHandler(db_name='invalid_db', collection_name='invalid_collection')
-        with patch.object(mongo_handler.collection, 'find_one') as mock_find_one:
-            result = mongo_handler.get_from_db('Invalid question')
-            mock_find_one.assert_not_called()
-            self.assertIsNone(result)
+        self.assertIsNone(handler.collection)
 
-    def test_get_from_db_question_not_found(self):
-        """
-        Test that attempting to retrieve an answer for a non-existent question from the MongoDB collection
-        results in a None response.
-        """
-        with patch.object(self.mongo_handler.collection, 'find_one', return_value=None) as mock_find_one:
-            result = self.mongo_handler.get_from_db('Non-existent question')
-            mock_find_one.assert_called_once_with({"question": 'Non-existent question'})
-            self.assertIsNone(result)
+    def test_add_to_db_without_connection(self):
+        """Test adding to the database without a valid connection."""
 
+        handler = MongoDBHandler(self.test_db_name, self.test_collection_name)
+        handler.collection = None
+
+        handler.add_to_db("Question", "Answer")
+
+        # Check if there are no documents in the collection
+        document = self.mongo_collection.find_one()
+        self.assertIsNone(document)
+
+    def test_get_from_db_without_connection(self):
+        """Test retrieving from the database without a valid connection."""
+
+        handler = MongoDBHandler(self.test_db_name, self.test_collection_name)
+        handler.collection = None
+
+        retrieved_answer = handler.get_from_db("Question")
+
+
+        self.assertIsNone(retrieved_answer)
+
+    def test_add_to_db_and_get_from_db_multiple_documents(self):
+        """Test adding and retrieving multiple documents from the database."""
+
+        handler = MongoDBHandler(self.test_db_name, self.test_collection_name)
+
+
+        handler.add_to_db("Question1", "Answer1")
+        handler.add_to_db("Question2", "Answer2")
+
+
+        retrieved_answer_1 = handler.get_from_db("Question1")
+        retrieved_answer_2 = handler.get_from_db("Question2")
+
+        self.assertEqual(retrieved_answer_1, "Answer1")
+        self.assertEqual(retrieved_answer_2, "Answer2")
+
+    def test_add_to_db_error_handling(self):
+        """Test error handling during document insertion."""
+
+        handler = MongoDBHandler(self.test_db_name, self.test_collection_name)
+        handler.collection.insert_one = None  # Simulate an error during insertion
+
+        with self.assertRaises(Exception):
+            handler.add_to_db("Question", "Answer")
+
+    def test_get_from_db_error_handling(self):
+        """Test error handling during document retrieval."""
+
+        handler = MongoDBHandler(self.test_db_name, self.test_collection_name)
+        handler.collection.find_one = None  # Simulate an error during retrieval
+
+        with self.assertRaises(Exception):
+            handler.get_from_db("Question")
 
 if __name__ == '__main__':
     unittest.main()
