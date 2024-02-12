@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 import unittest
 from unittest.mock import MagicMock, patch
-from mongo_db import MongoDBHandler
+from back_end.models.engine.mongo_db import MongoDBHandler
 
 class TestMongoDBHandler(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        # Set up a test MongoDB database and collection for the class
+        """ Set up a test MongoDB database and collection for the class """
         cls.test_db_name = 'test_db'
         cls.test_collection_name = 'test_collection'
         cls.mongo_handler = MongoDBHandler(db_name=cls.test_db_name, collection_name=cls.test_collection_name)
@@ -73,6 +73,7 @@ class TestMongoDBHandler(unittest.TestCase):
             result = self.mongo_handler.get_from_db('Non-existent question')
             mock_find_one.assert_called_once_with({"question": 'Non-existent question'})
             self.assertIsNone(result)
+
 
 if __name__ == '__main__':
     unittest.main()
