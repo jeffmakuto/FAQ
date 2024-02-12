@@ -36,20 +36,11 @@ class DBConfig:
         """
         return f"DBConfig(user={self.user}, password={self.password}, host={self.host}, port={self.port}, database={self.database})"
 
-# Configuration
-DB_CONFIG = {
-    'user': 'your_mysql_user',
-    'password': 'your_mysql_password',
-    'host': 'your_mysql_host',
-    'port': 'your_mysql_port',
-    'database': 'your_database_name',
-}
-
 # Creating an instance of DBConfig using the provided configuration
 my_db_config = DBConfig(
-    user=DB_CONFIG['user'],
-    password=DB_CONFIG['password'],
-    host=DB_CONFIG['host'],
-    port=DB_CONFIG['port'],
-    database=DB_CONFIG['database']
+    user='your_mysql_user',
+    password='your_mysql_password',
+    host='your_mysql_host',
+    port='your_mysql_port',
+    database='your_database_name'
 )
