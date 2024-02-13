@@ -47,6 +47,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  position: relative;     
 }
 
 .mission-container,
@@ -66,7 +67,7 @@ export default {
 }
 
 .content-container {
-  margin-top: 10px;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,11 +81,18 @@ export default {
 }
 
 h1 {
-  margin-top: 0;
+  height: auto;
+  position: absolute; /* Position the img element absolutely */
+  top: -80px; /* Adjust as needed */
+  right: 550px
 }
 
 img {
-  margin-top: 0;
+  max-width: 100%;
+  height: auto;
+  position: absolute; /* Position the img element absolutely */
+  top: 10px; /* Adjust as needed */
+  right: 450px;
 }
 
 </style>

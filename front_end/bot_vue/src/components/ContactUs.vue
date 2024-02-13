@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .contact-us {
   position: fixed;
-  bottom: 10px;
+  bottom: 30px;
   left: 49%;
   transform: translateX(-50%);
   background-color: #f0f0f0;

@@ -83,7 +83,7 @@ export default {
 
 .chatbox {
 	position: fixed;
-	bottom: 20px;
+	bottom: 50px;
 	right: 20px;
 	width: auto;
 	max-width: 600px;
