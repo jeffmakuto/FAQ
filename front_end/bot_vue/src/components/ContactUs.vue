@@ -30,8 +30,9 @@ export default {
 <style scoped>
 .contact-us {
   position: fixed;
-  bottom: 30px;
+  bottom: 45px;
   left: 49%;
+  font-size: 0.9em;
   transform: translateX(-50%);
   background-color: #f0f0f0;
   padding: 10px;

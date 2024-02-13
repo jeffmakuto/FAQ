@@ -83,7 +83,7 @@ export default {
 h1 {
   height: auto;
   position: absolute; /* Position the img element absolutely */
-  top: -80px; /* Adjust as needed */
+  top: -60px; /* Adjust as needed */
   right: 550px
 }
 
