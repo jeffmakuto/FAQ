@@ -161,15 +161,20 @@ input {
 	margin-right: 10px;
 }
 
-
 .toggle-btn {
-	border: none;
-	background-color: transparent;
-	cursor: pointer;
-	transform: rotate(45deg);
-	position: absolute;
-	top: 10px;
-	right: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.toggle-btn:hover {
+    background-color: white;
+    border: 1px solid #ccc;
 }
 
 </style>
