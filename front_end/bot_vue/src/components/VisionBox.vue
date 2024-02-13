@@ -1,32 +1,42 @@
-<template>
-  <div class="vision-box" ref="box" @click="rotateBox">
+v<template>
+  <div class="vision-box" :class="{ flipped: isFlipped }" @click="rotateBox">
     <div class="side front">
-      <p>Vision</p>
+      <p>Our Vision</p>
     </div>
     <div class="side back">
-      <p>Meaning: Colorful and important task</p>
+      <p>To be Africa's preferred and sustainable aviation group.</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isFlipped: false,
+      rotationInterval: null,
+    };
+  },
   methods: {
     rotateBox() {
-      if (this.$refs.box) {
-        this.$refs.box.classList.toggle('flipped');
-      }
+      this.isFlipped = !this.isFlipped;
+    },
+    startAutomaticRotation() {
+      this.rotationInterval = setInterval(() => {
+        this.isFlipped = !this.isFlipped;
+      }, 15000); /* Rotate every 15 seconds */
+    },
+    stopAutomaticRotation() {
+      clearInterval(this.rotationInterval);
     },
   },
-
   mounted() {
     this.$nextTick(() => {
-      setInterval(() => {
-        if (this.$refs.box) {
-          this.$refs.box.classList.toggle('flipped');
-        }
-      }, 10000); /* Rotate every 10 seconds */
+      this.startAutomaticRotation();
     });
+  },
+  beforeUnmount() {
+    this.stopAutomaticRotation();
   },
 };
 </script>
@@ -39,7 +49,8 @@ export default {
   transform-style: preserve-3d;
   transition: transform 0.5s;
   cursor: pointer;
-  animation: rotateAnimation 10s infinite; /* 10s for each rotation */
+  animation: rotateAnimation 15s infinite; /* 15s for each rotation */
+  border-radius: 20px;
 }
 
 .side {
@@ -50,15 +61,19 @@ export default {
   align-items: center;
   justify-content: center;
   backface-visibility: hidden;
+  border-radius: 20px;
 }
 
 .front {
   background-color: #f0f0f0;
+  color: #b64343;
+  font-weight: bold;
+  font-size: x-large;
 }
 
 .back {
   background-color: #b64343;
-  color: #fff;
+  color: #f0f0f0;
   transform: rotateY(180deg);
 }
 

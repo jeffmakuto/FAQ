@@ -91,11 +91,12 @@ export default {
 	max-height: 300px;
 	background-color: #f0f0f0;
 	border: 1px solid #ccc;
-	border-radius: 5px;
+	border-radius: 15px;
 	overflow-y: auto;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
+	z-index: 2;
 }
 
 .enlarged {
@@ -122,6 +123,8 @@ export default {
 	padding: 10px;
 	display: flex;
 	flex-direction: column-reverse; /* Reverse the order of the messages */
+	text-align: left;
+	word-wrap: break-word;
 }
 
 .input-container {
@@ -138,6 +141,7 @@ input {
 	border-radius: 5px;
 	margin-right: 10px;
 	font-size: 14px;
+	word-wrap: break-word;
 }
 
 .send-btn {

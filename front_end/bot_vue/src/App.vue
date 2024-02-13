@@ -9,9 +9,13 @@
     </div>
 
     <div class="content-container">
+      <div class="values-list-container">
+        <ValuesList />
+      </div>
       <h1>Ethics & Integrity</h1>
       <img alt="Ethics Logo" src="./assets/logo.png">
       <Bot />
+      <ContactUs />
     </div>
   </div>
 </template>
@@ -20,6 +24,8 @@
 import MissionBox from "@/components/MissionBox.vue";
 import VisionBox from "@/components/VisionBox.vue";
 import Bot from "@/components/Bot.vue";
+import ValuesList from "@/components/ValuesList.vue";
+import ContactUs from "@/components/ContactUs.vue";
 
 export default {
   name: "App",
@@ -27,6 +33,8 @@ export default {
     MissionBox,
     VisionBox,
     Bot,
+    ValuesList,
+    ContactUs,
   },
 };
 </script>
@@ -58,9 +66,25 @@ export default {
 }
 
 .content-container {
-  margin-top: 60px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+.values-list-container {
+  position: fixed;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+img {
+  margin-top: 0;
+}
+
 </style>
