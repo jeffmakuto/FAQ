@@ -13,26 +13,6 @@ COPY front_end/bot_vue/ .
 
 RUN npm run build
 
-# Backend Build Stage
-FROM python:3.8 as backend-build
-
-WORKDIR /app
-
-# Copy the backend code
-COPY back_end/ .
-
-# Copy the requirements file from the back_end directory
-COPY back_end/requirements.txt .
-
-# Install backend dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose the port your Flask app will run on
-EXPOSE 5000
-
-# Command to start the Flask application
-CMD ["python", "app.py"]
-
 # Production Stage (Nginx)
 FROM nginx
 
