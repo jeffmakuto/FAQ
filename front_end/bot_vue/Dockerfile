@@ -4,12 +4,12 @@ FROM node:latest as frontend-build
 WORKDIR /app
 
 # Copy package*.json from the front_end/bot_vue directory
-COPY front_end/bot_vue/package*.json ./
+COPY package*.json ./
 
 RUN npm install
 
 # Copy the entire front-end code
-COPY front_end/bot_vue/ .
+COPY . .
 
 RUN npm run build
 
