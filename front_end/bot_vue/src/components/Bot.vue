@@ -21,7 +21,7 @@
 import axios from 'axios';
 
 /* Define the base URL for the backend API */
-const baseURL = 'http://172.20.0.2:5000';
+const baseURL = '/bot';
 
 export default {
 	name: 'App',
@@ -52,7 +52,7 @@ export default {
 			this.messages.push(userMessage);
 
 			/* Send the user's message to the backend */
-			axios.post(`${baseURL}/bot`, { user_input: this.message })
+			axios.post(`${baseURL}`, { user_input: this.message })
 				.then(response => {
 					/* Get the bot's response */
 					const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
