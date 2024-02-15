@@ -7,6 +7,8 @@ RUN pip3 install -r requirements.txt
 
 RUN pip3 install Werkzeug==2.0.2
 
+RUN pip3 install gunicorn==20.1.0
+
 COPY . .
 
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
