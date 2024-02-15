@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 class RuleBasedBot:
     """
     Takes input processes it and answers back. if it doesn't understand,
-    it answers 'I don't have an answer for that, sorry'
+    it answers 'I don't have an answer for that, sorry.'
     """
     def __init__(self):
         """ Initialize the database to store the data """
@@ -44,7 +44,7 @@ class RuleBasedBot:
         else:
             self.add_to_db(user_input, "Forwarded to admin's email. Waiting for response.")
             admin_instance.forward_query_to_admin(user_input, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
-            return "To be Africa's preferred and sustainable aviation group."
+            return "I don't have an answer for that, sorry."
 
 
 class Admin:
