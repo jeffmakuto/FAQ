@@ -21,7 +21,7 @@
 import axios from 'axios';
 
 /* Define the base URL for the backend API */
-const baseURL = 'http://localhost:5000';
+const baseURL = 'http://backend-container:5000';
 
 export default {
 	name: 'App',
