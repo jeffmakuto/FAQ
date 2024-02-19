@@ -32,7 +32,7 @@ class SMTPConfig:
 
 # Create an instance with the configuration
 smtp_config_instance = SMTPConfig(
-    smtp_server='mailhog',
+    smtp_server='54.237.117.130',
     smtp_port=587,
     sender_email='hjeffmakuto@gmail.com',
     sender_password='',
