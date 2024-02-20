@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      values: ["Safety First", "Customer Obsession", "Integrity", "Accountability"],
+      values: ["Safety", "Customer Obsession", "Integrity", "Accountability"],
       currentIndex: 0,
       intervalId: null,
       valueHeight: 60,
