@@ -91,9 +91,9 @@ class NLPManager:
         vision_keywords = ["vision"]
 
         if any(keyword in doc.text.lower() for keyword in mission_keywords):
-            return "KQ's mission is to provide exceptional air travel services."
+            return "KQ's mission is to propel Africa's prosperity by connecting its people, cultures and markets."
         elif any(keyword in doc.text.lower() for keyword in vision_keywords):
-            return "KQ's vision is to be the airline of choice, connecting Africa to the world."
+            return "KQ's vision is to be Africa's preferred and sustainable Aviation group."
         else:
             return None
 
