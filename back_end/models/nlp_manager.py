@@ -74,7 +74,7 @@ class NLPManager:
         greetings = ["hi", "hello", "hey"]
         for token in doc:
             if token.lower_ in greetings:
-                return "Hello! How can I assist you today?"
+                return "Hellooooo there! How can I assist you today :)?"
         return None
 
     def analyze_mission_vision(self, doc):
@@ -107,12 +107,15 @@ class NLPManager:
         Returns:
             str or None: A scenario description for the detected SCIA value or None if no relevant keywords are found.
         """
-        scia_keywords = ["safety first", "customer obsession", "integrity", "accountability"]
+        scia_keywords = ["safety", "customer obsession", "integrity", "accountability"]
 
         for keyword in scia_keywords:
             if keyword in doc.text.lower():
-                return f"The SCIA value '{keyword.capitalize()}' represents {self.get_scenario_for_value(keyword)}."
+                value = keyword.capitalize()
+                meaning = self.get_scenario_for_value(keyword)
+                return f"{value}: {meaning}"
         return None
+
 
     def get_scenario_for_value(self, value):
         """
@@ -125,10 +128,10 @@ class NLPManager:
             str: A scenario description or a default message if the value is not recognized.
         """
         scenarios = {
-            "safety first": "Ensuring the highest safety standards in all flight operations.",
-            "customer obsession": "Providing personalized services to meet every customer's unique needs.",
-            "integrity": "Maintaining honesty and transparency in all business dealings.",
-            "accountability": "Taking responsibility for actions and ensuring accountability at all levels."
+            "safety": "Safety is the foundation of everything we do.",
+            "customer obsession": "We commit to creating positive memorable experiences for our customers.",
+            "integrity": "We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
+            "accountability": "We take initiative and responsibility for our actions, decisions and results."
         }
         return scenarios.get(value.lower(), "No specific scenario available.")
 
