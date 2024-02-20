@@ -1,18 +1,21 @@
-from flask import Flask, render_template, request, jsonify
+# back_end/app.py
+from flask import Flask
 from flask_cors import CORS
 from blueprints import app_blueprints
-import os
+from celery import Celery
 
 app = Flask(__name__)
-
 app.config.from_object(__name__)
 
-CORS(app, resources={r"/*":{'origins':'*'}})
+# Load Celery configuration from celery_config.py
+app.config.from_object('celery_config')
 
-# Global strict slashes
+# Initialize Celery
+celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+celery.conf.update(app.config)
+
+CORS(app, resources={r"/*": {'origins': '*'}})
 app.url_map.strict_slashes = False
-
-# Register blueprint
 app.register_blueprint(app_blueprints)
 
 
