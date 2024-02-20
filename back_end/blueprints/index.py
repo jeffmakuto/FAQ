@@ -23,8 +23,6 @@ def bot():
     """
     user_input = request.json.get('user_input')
 
-    print(f"Received user input: {user_input}")
-
     # Use SMTP configuration from smtp_config_instance
     bot_response = bot_instance.respond(
         user_input, admin_instance,
@@ -34,7 +32,5 @@ def bot():
         smtp_config_instance.sender_password,
         smtp_config_instance.recipient_email
     )
-
-    print(f"Generated bot response: {bot_response}")
 
     return jsonify({'bot_response': bot_response})
