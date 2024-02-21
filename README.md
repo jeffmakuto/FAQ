@@ -60,7 +60,7 @@ cd FAQ_Bot
 ```bash
 cd front_end/bot_vue
 ```
-Follow the setup stipulated in the front_end directory README.md file - [Setup Frontend](./front_end/bot_vue/README.md).
+Follow the setup instructions stipulated in the front_end directory README.md file - [Setup Frontend](./front_end/bot_vue/README.md).
 
 3. Install backend dependencies (create a virtual environment if preferred):
 
