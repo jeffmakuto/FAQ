@@ -1,78 +1,88 @@
 <template>
-	<div>
-		<div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
-			<div class="header">Bota(:-)</div>
-			<div class="message-container" ref="messageContainer">
-				<div v-for="(msg, index) in messages.slice().reverse()" :key="index" class="message" :class="{ 'user-message': msg.isUser }">
+  <div>
+    <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
+      <div class="header">Bota(:-)</div>
+      <div class="message-container" ref="messageContainer">
+        <div
+          v-for="(msg, index) in messages.slice().reverse()"
+          :key="index"
+          class="message"
+          :class="{ 'user-message': msg.isUser }"
+        >
           {{ msg.text }}
-				</div>
-			</div>
-			<div class="input-container">
-				<input v-model="message" @keyup.enter="sendMessage" placeholder="Type your message...">
-				<button class="send-btn" @click="sendMessage">Send</button>
-				<button class="clear-btn" @click="clearChat">Clear</button>
-			</div>
-			<button class="toggle-btn" @click="toggleChatBoxSize">&#8597;</button>
-		</div>
-	</div>
+        </div>
+      </div>
+      <div class="input-container">
+        <input v-model="message" @keyup.enter="sendMessage" placeholder="Type your message..." />
+        <button class="send-btn" @click="sendMessage">Send</button>
+        <button class="clear-btn" @click="clearChat">Clear</button>
+      </div>
+      <button class="toggle-btn" @click="toggleChatBoxSize">&#8597;</button>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
-	data() {
-		return {
-			isChatBoxEnlarged: false,
-			message: "",
-			messages: [],
-		};
-	},
+  data() {
+    return {
+      isChatBoxEnlarged: false,
+      message: '',
+      messages: [],
+      loading: false,
+    };
+  },
 
-	mounted() {
-		this.displayWelcomeMessage();
-	},
+  mounted() {
+    this.displayWelcomeMessage();
+  },
 
-	methods: {
-		async displayWelcomeMessage() {
-			const welcomeMessage = { text: "Bota: Hello there! I am Bota! How can I be of help today?", isUser: false };
-			this.messages.unshift(welcomeMessage);
+  methods: {
+    async displayWelcomeMessage() {
+      const welcomeMessage = { text: 'Bota: Hello there! I am Bota! How can I be of help today?', isUser: false };
+      this.messages.unshift(welcomeMessage);
 
-			try {
-				await this.sleep(3000); /* Sleep for 3 seconds */
-				this.clearChat();
-			} catch (error) {
-				console.error('Error while displaying welcome message:', error);
-			}
-		},
+      try {
+        await this.sleep(3000); /* Sleep for 3 seconds */
+        this.clearChat();
+      } catch (error) {
+        console.error('Error while displaying welcome message:', error.message);
+      }
+    },
 
-		async sendMessage() {
-			const userMessage = { text: "You: " + this.message, isUser: true };
-			this.messages.push(userMessage);
+    async sendMessage() {
+      const userMessage = { text: `You: ${this.message}`, isUser: true };
+      this.messages.push(userMessage);
+      this.loading = true;
 
-			try {
-				const response = await axios.post('http://54.237.117.130:5000/bot', { user_input: this.message });
-				const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
-				this.messages.push(botReply);
-			} catch (error) {
-				console.error('Error while sending message:', error);
-			}
-			this.message = "";
-		},
-		clearChat() {
-			this.messages = [];
-		},
-		toggleChatBoxSize() {
-			this.isChatBoxEnlarged = !this.isChatBoxEnlarged;
-		},
+      try {
+        const response = await axios.post(process.env.VUE_APP_API_URL, { user_input: this.message });
+        const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
+        this.messages.push(botReply);
+      } catch (error) {
+        console.error('Error while sending message:', error.message);
+      }
 
-		async sleep(ms) {
-			return new Promise(resolve => setTimeout(resolve, ms));
-		},
-	},
+      this.loading = false;
+      this.message = '';
+    },
+
+    clearChat() {
+      this.messages = [];
+    },
+
+    toggleChatBoxSize() {
+      this.isChatBoxEnlarged = !this.isChatBoxEnlarged;
+    },
+
+    async sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+  },
 };
 </script>
-
 
 <style scoped >
 
