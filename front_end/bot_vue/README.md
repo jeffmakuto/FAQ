@@ -24,4 +24,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-N/B: Access the frontend at http://localhost:8080.
+**N/B**: Access the frontend at http://localhost:8080.
