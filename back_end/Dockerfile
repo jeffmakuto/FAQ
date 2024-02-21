@@ -15,6 +15,4 @@ RUN python3 -m spacy download en_core_web_sm
 
 COPY . .
 
-RUN pip3 install celery==5.2.3
-
-CMD ["bash", "-c", "gunicorn -w 4 -b 0.0.0.0:5000 app:app & celery -A back_end.app.celery worker --loglevel=info"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
