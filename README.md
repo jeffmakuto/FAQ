@@ -84,16 +84,16 @@ Replace mynetwork with your desired network name.
 
 2. Run frontend and backend containers attached to the created network:
 
-For the Backend (assuming you are in the root directory):
-```bash
-docker build -t back ./back_end
-docker run --network=mynetwork -p 5000:5000 --name backend-container back
-```
-
 For the Frontend (assuming you are in the `front_end/bot_vue` directory):
 ```bash
 docker build -t front .
 docker run --network=mynetwork -p 8080:80 --name frontend-container front
+```
+
+For the Backend (assuming you are in the root directory):
+```bash
+docker build -t back ./back_end
+docker run --network=mynetwork -p 5000:5000 --name backend-container back
 ```
 
 3. Run a new MailHog container with port 587 exposed
