@@ -171,7 +171,7 @@ input {
 	background-color: transparent;
 	cursor: pointer;
 	transform: rotate(45deg);
-    	position: absolute;
+	position: absolute;
 	top: 10px;
 	right: 10px;
 	transition: background-color 0.3s, border-color 0.3s;
