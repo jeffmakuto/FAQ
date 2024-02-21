@@ -97,6 +97,24 @@ docker run --network=mynetwork -p 8080:80 --name frontend-container front
 ```bash
 docker run --name=mailhog --network=mynetwork -p 1025:1025 -p 587:587 -p 8025:8025 -v $(pwd)/mailhog.crt:/etc/ssl/mailhog.crt -v $(pwd)/mailhog.key:/etc/ssl/mailhog.key mailhog/mailhog
 ```
+4. To stop and remove the frontend and backend containers:
+
+ ```bash
+docker stop frontend-container
+docker rm frontend-container
+```
+```
+docker stop backend-container
+docker rm backend-container
+
+```
+Stop and remove the existing MailHog container
+```
+docker stop mailhog
+docker rm mailhog
+```
+
+**N/B: **If you've used different container names, replace `backend-container` and `frontend-container` with your actual container names.
 
 ## Configuration
 Adjust configurations in the respective frontend and backend directories if needed.
