@@ -21,60 +21,58 @@
 import axios from 'axios';
 
 export default {
-	name: 'App',
 	data() {
 		return {
 			isChatBoxEnlarged: false,
-			message: "", /* Variable to store the user's message */
-			messages: [] /* Array to store messages */
+			message: "",
+			messages: [],
 		};
 	},
 
 	mounted() {
-		/* Display welcome message when the component is mounted */
-		const welcomeMessage = { text: "Bota: Hello there! I am Bota! How can I be of help today?", isUser: false };
-		this.messages.unshift(welcomeMessage);
-
-		/* Remove the welcome message after 3 seconds */
-		setTimeout(() => {
-			this.clearChat();
-		}, 3000);
+		this.displayWelcomeMessage();
 	},
-	
+
 	methods: {
-		/* Method to send a message */
-		sendMessage() {
-			/* Get the user's message */
+		async displayWelcomeMessage() {
+			const welcomeMessage = { text: "Bota: Hello there! I am Bota! How can I be of help today?", isUser: false };
+			this.messages.unshift(welcomeMessage);
+
+			try {
+				await this.sleep(3000); /* Sleep for 3 seconds */
+				this.clearChat();
+			} catch (error) {
+				console.error('Error while displaying welcome message:', error);
+			}
+		},
+
+		async sendMessage() {
 			const userMessage = { text: "You: " + this.message, isUser: true };
 			this.messages.push(userMessage);
 
-			/* Send the user's message to the backend */
-			axios.post('http://54.237.117.130:5000/bot', { user_input: this.message })
-				.then(response => {
-					/* Get the bot's response */
-					const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
-					this.messages.push(botReply);
-				})
-				.catch(error => {
-					console.error('There was an error!', error);
-				});
-
-			/* Clear the input field */
+			try {
+				const response = await axios.post('http://54.237.117.130:5000/bot', { user_input: this.message });
+				const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
+				this.messages.push(botReply);
+			} catch (error) {
+				console.error('Error while sending message:', error);
+			}
 			this.message = "";
 		},
-
-		/* Method to clear the chat */
 		clearChat() {
 			this.messages = [];
 		},
-
-		/* Method to toggle the chat box size */
 		toggleChatBoxSize() {
 			this.isChatBoxEnlarged = !this.isChatBoxEnlarged;
-		}
-	}
-}
+		},
+
+		async sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		},
+	},
+};
 </script>
+
 
 <style scoped >
 
@@ -159,19 +157,19 @@ input {
 }
 
 .toggle-btn {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    transform: rotate(45deg);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    transition: background-color 0.3s, border-color 0.3s;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	transform: rotate(45deg);
+    	position: absolute;
+	top: 10px;
+	right: 10px;
+	transition: background-color 0.3s, border-color 0.3s;
 }
 
 .toggle-btn:hover {
-    background-color: white;
-    border: 1px solid #ccc;
+	background-color: white;
+	border: 1px solid #ccc;
 }
 
 </style>
