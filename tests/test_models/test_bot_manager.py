@@ -3,7 +3,7 @@
 import unittest
 import smtplib
 from unittest.mock import patch, Mock
-from models.bot_manager import RuleBasedBot, Admin
+from back_end.models.bot_manager import RuleBasedBot, Admin
 
 
 class TestRuleBasedBot(unittest.TestCase):
