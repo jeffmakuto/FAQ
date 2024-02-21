@@ -16,7 +16,7 @@ from . import app_blueprints
 from flask import jsonify, render_template, request
 from models.bot_manager import RuleBasedBot, Admin
 from config import smtp_config_instance
-from app import socketio
+from . import socketio
 
 # Initialize instances
 bot_instance = RuleBasedBot()
