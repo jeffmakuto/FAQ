@@ -70,6 +70,7 @@ class TestRuleBasedBot(unittest.TestCase):
             "sender_password",
             "recipient_email"
         )
+
     def test_nlp_manager_responses(self):
         """ Test response when the bot tries to answer using NLPManager """
         user_input = "Tell me about the company's mission."
