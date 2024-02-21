@@ -13,9 +13,6 @@ This is a project that combines a Vue.js frontend with a Python Flask backend to
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Frontend](#frontend)
-- [Backend](#backend)
-- [Docker](#docker)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -51,7 +48,38 @@ This bot provides an interactive chat experience with Bota, a chatbot designed t
 1. Clone the repository and change working directory into it:
 
 ```bash
-git clone https://github.com/<your-username>/FAQ_Bot.git
+git clone https://github.com/jeffmakuto/FAQ_Bot.git
 cd FAQ_Bot
 ```
+
+2. Install frontend dependencies:
+
+```bash
+cd front_end/bot_vue
+```
+Follow the setup stipulated in the front_end directory README.md file.
+
+3. Install backend dependencies (create a virtual environment if preferred):
+
+```bash
+cd back_end
+```
+Follow setup instructions stipulated in the back_end directory README.md file.
+
+## Configuration
+Adjust configurations in the respective frontend and backend directories if needed.
+
+## Usage
+Access the chat interface by opening the provided frontend URL in a web browser.
+
+## API Endpoints
+* POST /bot: Send user input to the chatbot and receive responses.
+
+
+
+## License
+
+This project is licensed under the [Jeff Makuto Proprietary License](LICENSE).
+
+© 2024 Jeff Makuto. All rights reserved.
 
