@@ -16,6 +16,7 @@ from . import app_blueprints
 from flask import jsonify, render_template, request
 from models.bot_manager import RuleBasedBot, Admin
 from config import smtp_config_instance
+from app import socketio
 
 # Initialize instances
 bot_instance = RuleBasedBot()
@@ -26,7 +27,6 @@ def handle_connect():
     """
     Socket event handler: Triggered when a client connects.
     """
-    from app import socketio
     print('Client connected')
 
 @socketio.on('disconnect')
@@ -34,7 +34,6 @@ def handle_disconnect():
     """
     Socket event handler: Triggered when a client disconnects.
     """
-    from app import socketio
     print('Client disconnected')
 
 @app_blueprints.route('/bot', methods=['POST'])
