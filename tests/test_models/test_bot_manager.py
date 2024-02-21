@@ -5,6 +5,7 @@ import smtplib
 from unittest.mock import patch, Mock
 from models.bot_manager import RuleBasedBot, Admin
 
+
 class TestRuleBasedBot(unittest.TestCase):
     """ Test for the functionality of the RuleBasedBot class """
 
