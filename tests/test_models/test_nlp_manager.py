@@ -2,7 +2,7 @@
 """ Test for nlp_manager.py file """
 import unittest
 from unittest.mock import patch
-from models.nlp_manager import NLPManager
+from back_end.models.nlp_manager import NLPManager
 
 
 class TestNLPManager(unittest.TestCase):
