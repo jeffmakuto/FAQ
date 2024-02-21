@@ -3,18 +3,7 @@
 ## Structure
 The backend directory contains Python Flask backend files.
 
-## Installation
-
-```bash
-pip install -r requirements.txt
-```
-
 ## Usage
-
-Run the backend:
-
-```bash
-python app.py
-```
+Refer the Docker instructions of the back_end directory.
 
 **N/B**: The backend will be available at http://localhost:5000.
