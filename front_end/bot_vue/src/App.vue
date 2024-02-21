@@ -21,7 +21,7 @@
 <script>
 import MissionBox from "@/components/MissionBox.vue";
 import VisionBox from "@/components/VisionBox.vue";
-import BotComponent from "@/components/Bot.Componentvue";
+import BotComponent from "@/components/BotComponent.vue";
 import ValuesList from "@/components/ValuesList.vue";
 import ContactUs from "@/components/ContactUs.vue";
 
