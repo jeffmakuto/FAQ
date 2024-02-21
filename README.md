@@ -1,5 +1,7 @@
 # Ethics and Integrity FAQ Bot
 ![The Bot Page](front_end/bot_vue/src/assets/init.png)
+
+
 This is a project that combines a Vue.js frontend with a Python Flask backend to create an interactive ethics and integrity chatbot.
 
 ## Table of Contents
