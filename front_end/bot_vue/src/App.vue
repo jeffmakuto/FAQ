@@ -12,7 +12,7 @@
 			</div>
 			<h1>Ethics & Integrity</h1>
 			<img alt="Ethics Logo" src="./assets/logo.png">
-			<Bot />
+			<BotComponent />
 			<ContactUs />
 		</div>
 	</div>
@@ -21,7 +21,7 @@
 <script>
 import MissionBox from "@/components/MissionBox.vue";
 import VisionBox from "@/components/VisionBox.vue";
-import Bot from "@/components/Bot.vue";
+import BotComponent from "@/components/BotComponent.vue";
 import ValuesList from "@/components/ValuesList.vue";
 import ContactUs from "@/components/ContactUs.vue";
 
@@ -30,7 +30,7 @@ export default {
 	components: {
 		MissionBox,
 		VisionBox,
-		Bot,
+		BotComponent,
 		ValuesList,
 		ContactUs,
 	},
