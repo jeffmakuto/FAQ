@@ -3,7 +3,8 @@
 import unittest
 import smtplib
 from unittest.mock import patch, Mock
-from models.bot_manager import RuleBasedBot, Admin
+from back_end.models.bot_manager import RuleBasedBot, Admin
+
 
 class TestRuleBasedBot(unittest.TestCase):
     """ Test for the functionality of the RuleBasedBot class """
@@ -71,6 +72,48 @@ class TestRuleBasedBot(unittest.TestCase):
             "recipient_email"
         )
 
+    def test_nlp_manager_responses(self):
+        """ Test response when the bot tries to answer using NLPManager """
+        user_input = "Tell me about the company's mission."
+        nlp_manager_instance = Mock()
+        
+        # Mock the responses from NLPManager
+        nlp_manager_instance.process_input.return_value = Mock()
+        nlp_manager_instance.analyze_greeting.return_value = None
+        nlp_manager_instance.analyze_mission_vision.return_value = "Our mission is to..."
+        nlp_manager_instance.analyze_scia_values.return_value = None
+        
+        # Set the NLPManager instance in the bot
+        self.bot.nlp_manager = nlp_manager_instance
+    
+        # Mock the additional parameters needed for respond method
+        admin_instance = Mock()
+        smtp_server = "mock_server"
+        smtp_port = 587
+        sender_email = "mock_sender@example.com"
+        sender_password = "mock_password"
+        recipient_email = "mock_recipient@example.com"
+    
+        # Call the respond method
+        response = self.bot.respond(
+            user_input,
+            admin_instance,
+            smtp_server,
+            smtp_port,
+            sender_email,
+            sender_password,
+            recipient_email
+        )
+    
+        # Assert the response from NLPManager is returned
+        self.assertEqual(response, "Our mission is to...")
+    
+        # Assert that the user input is not added to the database
+        self.assertNotIn(user_input, self.bot.db)
+    
+        # Assert that the forward_query_to_admin method is not called
+        admin_instance.forward_query_to_admin.assert_not_called()
+    
 
 class TestAdmin(unittest.TestCase):
 

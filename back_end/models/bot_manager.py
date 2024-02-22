@@ -3,6 +3,7 @@
 import smtplib
 from email.mime.text import MIMEText
 import logging
+from .nlp_manager import NLPManager
 
 # Configure the logger
 logging.basicConfig(level=logging.INFO)
@@ -10,12 +11,13 @@ logging.basicConfig(level=logging.INFO)
 
 class RuleBasedBot:
     """
-    Takes input processes it and answers back. if it doesn't understand,
+    Takes input processes it and answers back. If it doesn't understand,
     it answers 'I don't have an answer for that, sorry.'
     """
     def __init__(self):
         """ Initialize the database to store the data """
         self.db = {}
+        self.nlp_manager = NLPManager()
 
     def add_to_db(self, q, a):
         """ Adds the new query to the database """
@@ -24,7 +26,8 @@ class RuleBasedBot:
     def respond(self, user_input, admin_instance, smtp_server, smtp_port, sender_email, sender_password, recipient_email):
         """
         Checks if an answer is provided in the db and responds.
-        If the response isn't found, it adds the query to the database,
+        If the response isn't found, it tries to answer using NLPManager.
+        If not successful, it adds the query to the database,
         then forwards it to the admin and marks it as unresolved.
 
         Parameters:
@@ -39,12 +42,27 @@ class RuleBasedBot:
         Returns:
         - str: The bot's response.
         """
+        # Check if the user input is in the database
         if user_input in self.db:
             return self.db[user_input]
         else:
-            self.add_to_db(user_input, "Forwarded to admin's email. Waiting for response.")
-            admin_instance.forward_query_to_admin(user_input, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
-            return "I don't have an answer for that, sorry."
+            # Try to answer using NLPManager
+            nlp_doc = self.nlp_manager.process_input(user_input)
+            greeting_response = self.nlp_manager.analyze_greeting(nlp_doc)
+            mission_vision_response = self.nlp_manager.analyze_mission_vision(nlp_doc)
+            scia_values_response = self.nlp_manager.analyze_scia_values(nlp_doc)
+
+            if greeting_response:
+                return greeting_response
+            elif mission_vision_response:
+                return mission_vision_response
+            elif scia_values_response:
+                return scia_values_response
+            else:
+                # If not successful, add the query to the database and forward to admin
+                self.add_to_db(user_input, "Forwarded to admin's email. Waiting for response.")
+                admin_instance.forward_query_to_admin(user_input, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
+                return "I don't have an answer for that, sorry."
 
 
 class Admin:
