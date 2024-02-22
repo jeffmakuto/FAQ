@@ -54,5 +54,5 @@ def bot():
         smtp_config_instance.recipient_email
     )
 
-    emit('bot_response', {'bot_response': bot_response}, broadcast=True)
+    socketio.emit('bot_response', {'bot_response': bot_response}, broadcast=True)
     return jsonify({'bot_response': bot_response})
