@@ -54,7 +54,7 @@ export default {
 			this.messages.push(userMessage);
 
 			/* Send the user's message to the backend */
-			axios.post('http://35.174.207.200:5000/bot', { user_input: this.message })
+			axios.post('http://54.237.117.130:5000/bot', { user_input: this.message })
 				.then(response => {
 					/* Get the bot's response */
 					const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
