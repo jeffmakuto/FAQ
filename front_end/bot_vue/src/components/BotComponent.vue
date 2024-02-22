@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="input-container">
-        <input v-model="message" @keyup.enter="sendMessage" placeholder="Type your message..." />
+        <input v-model="message" @keyup.enter="sendMessage" placeholder="Talk to me..." />
         <button class="send-btn" @click="sendMessage">Send</button>
         <button class="clear-btn" @click="clearChat">Clear</button>
       </div>
@@ -26,62 +26,59 @@
 import axios from 'axios';
 
 export default {
-  data() {
-    return {
-      isChatBoxEnlarged: false,
-      message: '',
-      messages: [],
-      loading: false,
-    };
-  },
+	name: 'App',
+	data() {
+		return {
+			isChatBoxEnlarged: false,
+			message: "", /* Variable to store the user's message */
+			messages: [] /* Array to store messages */
+		};
+	},
 
-  mounted() {
-    this.displayWelcomeMessage();
-  },
+	mounted() {
+		/* Display welcome message when the component is mounted */
+		const welcomeMessage = { text: "Bota: Hello there! I am Bota! How can I be of help today?", isUser: false };
+		this.messages.unshift(welcomeMessage);
 
-  methods: {
-    async displayWelcomeMessage() {
-      const welcomeMessage = { text: 'Bota: Hello there! I am Bota! How can I be of help today?', isUser: false };
-      this.messages.unshift(welcomeMessage);
+		/* Remove the welcome message after 3 seconds */
+		setTimeout(() => {
+			this.clearChat();
+		}, 3000);
+	},
+	
+	methods: {
+		/* Method to send a message */
+		sendMessage() {
+			/* Get the user's message */
+			const userMessage = { text: "You: " + this.message, isUser: true };
+			this.messages.push(userMessage);
 
-      try {
-        await this.sleep(3000); /* Sleep for 3 seconds */
-        this.clearChat();
-      } catch (error) {
-        console.error('Error while displaying welcome message:', error.message);
-      }
-    },
+			/* Send the user's message to the backend */
+			axios.post('http://35.174.207.200:5000/bot', { user_input: this.message })
+				.then(response => {
+					/* Get the bot's response */
+					const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
+					this.messages.push(botReply);
+				})
+				.catch(error => {
+					console.error('There was an error!', error);
+				});
 
-    async sendMessage() {
-      const userMessage = { text: `You: ${this.message}`, isUser: true };
-      this.messages.push(userMessage);
-      this.loading = true;
+			/* Clear the input field */
+			this.message = "";
+		},
 
-      try {
-        const response = await axios.post(process.env.VUE_APP_API_URL, { user_input: this.message });
-        const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
-        this.messages.push(botReply);
-      } catch (error) {
-        console.error('Error while sending message:', error.message);
-      }
+		/* Method to clear the chat */
+		clearChat() {
+			this.messages = [];
+		},
 
-      this.loading = false;
-      this.message = '';
-    },
-
-    clearChat() {
-      this.messages = [];
-    },
-
-    toggleChatBoxSize() {
-      this.isChatBoxEnlarged = !this.isChatBoxEnlarged;
-    },
-
-    async sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
-  },
-};
+		/* Method to toggle the chat box size */
+		toggleChatBoxSize() {
+			this.isChatBoxEnlarged = !this.isChatBoxEnlarged;
+		}
+	}
+}
 </script>
 
 <style scoped >
