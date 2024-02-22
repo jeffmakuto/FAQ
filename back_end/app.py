@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from blueprints import app_blueprints
-import os
 
 app = Flask(__name__)
 
