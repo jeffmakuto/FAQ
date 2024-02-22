@@ -61,14 +61,12 @@ export default {
         const response = await axios.post(process.env.VUE_APP_API_URL, { user_input: this.message });
         const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
         this.messages.push(botReply);
-
-        await this.$nextTick(() => {
-          this.message = ''; /* Clear the input field */
       } catch (error) {
         console.error('Error while sending message:', error.message);
-      } finally {
-        this.loading = false;
       }
+
+      this.loading = false;
+      this.message = '';
     },
 
     clearChat() {
