@@ -63,6 +63,9 @@ export default {
         this.messages.push(botReply);
       } catch (error) {
         console.error('Error while sending message:', error.message);
+      } finally {
+        this.loading = false;
+        this.message = '';
       }
 
       this.loading = false;
