@@ -14,6 +14,7 @@ This is a project that combines a Vue.js frontend with a Python Flask backend to
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [Docker](#docker)
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
