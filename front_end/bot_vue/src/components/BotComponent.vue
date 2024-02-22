@@ -55,6 +55,7 @@ export default {
     async sendMessage() {
       const userMessage = { text: `You: ${this.message}`, isUser: true };
       this.messages.push(userMessage);
+      this.message = '';
       this.loading = true;
 
       try {
@@ -65,11 +66,7 @@ export default {
         console.error('Error while sending message:', error.message);
       } finally {
         this.loading = false;
-        this.message = '';
       }
-
-      this.loading = false;
-      this.message = '';
     },
 
     clearChat() {
