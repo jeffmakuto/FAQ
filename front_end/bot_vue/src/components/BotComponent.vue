@@ -7,7 +7,7 @@
           v-for="(msg, index) in messages.slice().reverse()"
           :key="index"
           class="message"
-          :class="{ 'user-message': msg.isUser }"
+          :class="{ 'user-message': msg.isUser, 'bot-message': !msg.isUser }"
         >
           {{ msg.text }}
         </div>
@@ -180,6 +180,14 @@ input {
 .toggle-btn:hover {
 	background-color: white;
 	border: 1px solid #ccc;
+}
+
+.user-message {
+	color: red;
+}
+
+.bot-message {
+	color: blue;
 }
 
 </style>
