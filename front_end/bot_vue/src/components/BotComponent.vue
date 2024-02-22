@@ -62,11 +62,12 @@ export default {
         const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
         this.messages.push(botReply);
 
-        this.$nextTick(() => {
+        await this.$nextTick(() => {
           this.message = ''; /* Clear the input field */
-          this.loading = false;
       } catch (error) {
         console.error('Error while sending message:', error.message);
+      } finally {
+        this.loading = false;
       }
     },
 
