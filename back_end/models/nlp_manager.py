@@ -137,8 +137,5 @@ class NLPManager:
         # Get the scenario for the given value
         scenario = scenarios.get(value.lower(), default_message)
 
-        # Remove the value and the colon from the beginning of the scenario
-        if scenario.lower().startswith(value.lower() + ":"):
-            scenario = scenario[len(value) + 1:].strip()
         return scenario if scenario else default_message
         
