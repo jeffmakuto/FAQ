@@ -141,5 +141,5 @@ class NLPManager:
         # Remove the value and the colon from the scenario to avoid repetition
         scenario_without_value = scenario.replace(value.lower() + ": ", "").strip()
     
-        return scenario_without_value if scenario_without_value else default_message
+        return scenario_without_value if scenario_without_value != scenario else default_message
 
