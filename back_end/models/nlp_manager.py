@@ -133,12 +133,12 @@ class NLPManager:
             "accountability":"We take initiative and responsibility for our actions, decisions and results."
         }
         default_message = "I don't have an answer for that, sorry."
-    
+
         # Get the scenario for the given value
         scenario = scenarios.get(value.lower(), default_message)
-    
-        # Split the scenario based on colon and take the second part
-        scenario_without_value = scenario.split(':', 1)[-1].strip()
-    
-        return scenario_without_value if scenario_without_value else default_message
+
+        # Remove the value and the colon from the beginning of the scenario
+        if scenario.lower().startswith(value.lower() + ":"):
+            scenario = scenario[len(value) + 1:].strip()
+        return scenario if scenario else default_message
         
