@@ -180,11 +180,12 @@ input {
 }
 
 .user-message {
-	color: red;
+	color: black;
+	font-weight: bold;
 }
 
 .bot-message {
-	color: blue;
+	color: black;
 }
 
 </style>
