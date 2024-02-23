@@ -117,28 +117,28 @@ class NLPManager:
         return None
 
     def get_scenario_for_value(self, value):
-    """
-    Retrieves a scenario description for a given SCIA value.
-
-    Args:
-        value (str): The SCIA value for which the scenario is requested.
-
-    Returns:
-        str: A scenario description or a default message if the value is not recognized.
-    """
-    scenarios = {
-        "safety": " Safety is the foundation of everything we do.",
-        "customer obsession": " We commit to creating positive memorable experiences for our customers.",
-        "integrity": "We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
-        "accountability": "We take initiative and responsibility for our actions, decisions and results."
-    }
-    default_message = "I don't have an answer for that, sorry."
-
-    # Get the scenario for the given value
-    scenario = scenarios.get(value.lower(), default_message)
-
-    # Remove the value and the colon from the scenario to avoid repetition
-    scenario_without_value = scenario.replace(value.lower() + ":", "").strip()
-
-    return scenario_without_value if scenario_without_value else default_message
-
+        """
+        Retrieves a scenario description for a given SCIA value.
+    
+        Args:
+            value (str): The SCIA value for which the scenario is requested.
+    
+        Returns:
+            str: A scenario description or a default message if the value is not recognized.
+        """
+        scenarios = {
+            "safety": " Safety is the foundation of everything we do.",
+            "customer obsession": " We commit to creating positive memorable experiences for our customers.",
+            "integrity": "We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
+            "accountability": "We take initiative and responsibility for our actions, decisions and results."
+        }
+        default_message = "I don't have an answer for that, sorry."
+    
+        # Get the scenario for the given value
+        scenario = scenarios.get(value.lower(), default_message)
+    
+        # Remove the value and the colon from the scenario to avoid repetition
+        scenario_without_value = scenario.replace(value.lower() + ":", "").strip()
+    
+        return scenario_without_value if scenario_without_value else default_message
+    
