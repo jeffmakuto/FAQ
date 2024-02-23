@@ -9,6 +9,8 @@
           class="message"
           :class="{ 'user-message': msg.isUser, 'bot-message': !msg.isUser }"
         >
+          <span v-if="msg.isUser" class="bold-text">You:</span>
+          <span v-else class="bold-text">Bota:</span>
           {{ msg.text }}
         </div>
       </div>
@@ -188,4 +190,8 @@ input {
 	color: black;
 }
 
+.bold-text {
+	font-weight: bold;
+}
+	
 </style>
