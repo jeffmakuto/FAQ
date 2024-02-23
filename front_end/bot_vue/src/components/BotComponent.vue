@@ -39,7 +39,7 @@ export default {
 
 	mounted() {
 		/* Display welcome message when the component is mounted */
-		const welcomeMessage = { text: "Bota: Hello there! I am Bota! How can I be of help today?", isUser: false };
+		const welcomeMessage = { text: "Hello there! I am Bota! How can I be of help today?", isUser: false };
 		this.messages.unshift(welcomeMessage);
 
 		/* Remove the welcome message after 3 seconds */
@@ -52,14 +52,14 @@ export default {
 		/* Method to send a message */
 		sendMessage() {
 			/* Get the user's message */
-			const userMessage = { text: "You: " + this.message, isUser: true };
+			const userMessage = { text: this.message, isUser: true };
 			this.messages.push(userMessage);
 
 			/* Send the user's message to the backend */
 			axios.post('http://35.174.207.200:5000/bot', { user_input: this.message })
 				.then(response => {
 					/* Get the bot's response */
-					const botReply = { text: `Bota: ${response.data.bot_response}`, isUser: false };
+					const botReply = { text: `${response.data.bot_response}`, isUser: false };
 					this.messages.push(botReply);
 				})
 				.catch(error => {
@@ -183,7 +183,6 @@ input {
 
 .user-message {
 	color: black;
-	font-weight: bold;
 }
 
 .bot-message {
