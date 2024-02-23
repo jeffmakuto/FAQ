@@ -133,5 +133,13 @@ class NLPManager:
             "integrity":"- We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
             "accountability":"- We take initiative and responsibility for our actions, decisions and results."
         }
-        return scenarios.get(value.lower(), "No specific scenario available.")
+        default_message = "I don't have an answer for that, sorry."
+
+        # Get the scenario for the given value
+        scenario = scenarios.get(value.lower(), default_message)
+    
+        # Remove the value and the colon from the scenario to avoid repetition
+        scenario_without_value = scenario.replace(value.lower() + ": ", "").strip()
+    
+        return scenario_without_value if scenario_without_value else default_message
 
