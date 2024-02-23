@@ -138,8 +138,11 @@ class NLPManager:
         # Get the scenario for the given value
         scenario = scenarios.get(value.lower(), default_message)
     
-        # Remove the value and the colon from the scenario to avoid repetition
-        scenario_without_value = scenario.replace(value.lower() + ": ", "").strip()
+        # Check if the scenario starts with the provided value and colon
+        if scenario.lower().startswith(value.lower() + ":"):
+            # Remove the value and the colon from the scenario to avoid repetition
+            scenario_without_value = scenario[len(value) + 1:].strip()
+        else:
+            scenario_without_value = scenario
     
-        return scenario_without_value if scenario_without_value != scenario else default_message
-
+        return scenario_without_value if scenario_without_value else default_message
