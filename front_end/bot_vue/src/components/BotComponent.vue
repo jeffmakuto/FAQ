@@ -3,7 +3,9 @@
     <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
       <div class="header">Bota(:-)</div>
       <div class="message-container" ref="messageContainer">
-        <div
+        <SpeakUpMessage :showSpeakUpMessage="showSpeakUpMessage && messages.length === 0" />
+	<EnlargedChatboxMessage :showBlinkingMessage="isChatBoxEnlarged && showBlinkingMessage && messages.length === 0" :messages="messages" />
+	<div
           v-for="(msg, index) in messages.slice().reverse()"
           :key="index"
           class="message"
@@ -36,14 +38,22 @@
 
 <script>
 import axios from 'axios';
+import SpeakUpMessage from './SpeakUpMessage.vue';
+import EnlargedChatboxMessage from './EnlargedChatboxMessage.vue';
 
 export default {
   name: 'App',
+  components: {
+    SpeakUpMessage,
+    EnlargedChatboxMessage,
+  },
   data() {
     return {
       isChatBoxEnlarged: false,
       message: "",
-      messages: []
+      messages: [],
+      showSpeakUpMessage: true,
+      showBlinkingMessage: true
     };
   },
 
@@ -79,6 +89,8 @@ export default {
 
     clearChat() {
       this.messages = [];
+      this.showSpeakUpMessage = true;
+      this.showBlinkingMessage = true;
     },
 
     toggleChatBoxSize() {
