@@ -45,7 +45,10 @@ export default {
 	text-align: center;
 	color: #2c3e50;
 	margin-top: 60px;
-	position: relative;     
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .mission-container,
