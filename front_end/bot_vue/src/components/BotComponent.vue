@@ -164,11 +164,11 @@ export default {
 }
 
 .user-avatar {
-  background-color: #4CAF50;
+  background-color: 🧑;
 }
 
 .bot-avatar {
-  background-color: #2196F3;
+  background-color: 🤖;
 }
 
 .message-content {
