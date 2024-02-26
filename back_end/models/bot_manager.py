@@ -62,7 +62,7 @@ class RuleBasedBot:
                 # If not successful, add the query to the database and forward to admin
                 self.add_to_db(user_input, "Forwarded to admin's email. Waiting for response.")
                 admin_instance.forward_query_to_admin(user_input, smtp_server, smtp_port, sender_email, sender_password, recipient_email)
-                return "I don't have an answer for that, sorry."
+                return "I don't have an answer for that, sorry. 😔"
 
 
 class Admin:
