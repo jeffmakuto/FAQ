@@ -74,10 +74,11 @@ class NLPManager:
         greetings = ["hi", "hello", "hey"]
         gratitude_words = ["thanks", "thank", "thank you"]
         for token in doc:
-            if token.lower_ in greetings:
+            if token.text.lower() in greetings:
                 return "Hello there!👋 How can I assist you today? 😊"
-            if any(token.lower_ in gratitude_words for token in doc):
+            if any(token.text.lower() in gratitude_words for token in doc):
                 return "You're welcome! 🤗😊"
+    
         return None
 
     def analyze_mission_vision(self, doc):
