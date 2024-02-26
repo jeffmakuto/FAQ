@@ -66,14 +66,15 @@ export default {
 
 .front {
 	background-color: #f0f0f0;
-	color: #b64343;
+	color: red;
 	font-weight: bold;
 	font-size: x-large;
 }
 
 .back {
-	background-color: #b64343;
+	background-color: red;
 	color: #f0f0f0;
+	font-weight: bold;
 	transform: rotateY(180deg);
 }
 
