@@ -92,38 +92,4 @@ img {
 	top: 10px;
 	right: 450px;
 }
-/* Media Queries for Responsive Design */
-
-@media screen and (min-width: 768px) {
-  .mission-container,
-  .vision-container,
-  .values-list-container {
-    width: 45%;
-    max-width: none;
-  }
-
-  h1 {
-    margin-top: 30px;
-  }
-
-  img {
-    margin-top: 30px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .mission-container,
-  .vision-container,
-  .values-list-container {
-    width: 30%;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .mission-container,
-  .vision-container,
-  .values-list-container {
-    width: 25%;
-  }
-}
 </style>
