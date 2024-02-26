@@ -80,6 +80,7 @@ Follow setup instructions stipulated in the back_end directory README.md file - 
 
 ```bash
 docker network create mynetwork
+
 ```
 Replace mynetwork with your desired network name.
 
@@ -89,24 +90,28 @@ For the Frontend (assuming you are in the `front_end/bot_vue` directory):
 ```bash
 docker build -t front .
 docker run --network=mynetwork -p 8080:80 --name frontend-container front
+
 ```
 
 For the Backend (assuming you are in the root directory):
 ```bash
 docker build -t back ./back_end
 docker run --network=mynetwork -p 5000:5000 --name backend-container back
+
 ```
 
 3. Run a new MailHog container with port 587 exposed
 
 ```bash
 docker run --name=mailhog --network=mynetwork -p 1025:1025 -p 587:587 -p 8025:8025 -v $(pwd)/mailhog.crt:/etc/ssl/mailhog.crt -v $(pwd)/mailhog.key:/etc/ssl/mailhog.key mailhog/mailhog
+
 ```
 4. To stop and remove the frontend and backend containers:
 
  ```bash
 docker stop frontend-container
 docker rm frontend-container
+
 ```
 ```
 docker stop backend-container
@@ -117,6 +122,7 @@ Stop and remove the existing MailHog container
 ```
 docker stop mailhog
 docker rm mailhog
+
 ```
 
 **N/B: **If you've used different container names, replace `backend-container` and `frontend-container` with your actual container names.
