@@ -46,6 +46,8 @@ class NLPManager:
             spacy.Doc: The processed spaCy document.
         """
         doc = self.nlp(user_input)
+        if any(token.lower_ in ["thanks", "thank", "thank you"] for token in doc):
+            return "You're welcome! 🤗😊"
         return doc
 
     def extract_entities(self, doc):
