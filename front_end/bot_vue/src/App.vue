@@ -83,7 +83,6 @@ h1 {
 	position: absolute;
 	top: -60px;
 	right: 550px;
-	transform: translateX(-30%);
 }
 
 img {
@@ -92,6 +91,5 @@ img {
 	position: absolute;
 	top: 10px;
 	right: 450px;
-	transform: translateX(-30%);
 }
 </style>
