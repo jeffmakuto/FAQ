@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .contact-us {
 	position: fixed;
-	bottom: 45px;
+	bottom: 50px;
 	left: 49%;
 	font-size: 0.9em;
 	transform: translateX(-50%);
