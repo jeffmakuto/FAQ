@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
-      <div class="header">Bota(:-)</div>
+      <div class="header">Bota😊</div>
       <div class="message-container" ref="messageContainer">
         <SpeakUpMessage :showSpeakUpMessage="showSpeakUpMessage && messages.length === 0" />
 	<EnlargedChatboxMessage :showBlinkingMessage="isChatBoxEnlarged && showBlinkingMessage && messages.length === 0" :messages="messages" />
@@ -11,8 +11,8 @@
           class="message"
           :class="{ 'user-message': msg.isUser, 'bot-message': !msg.isUser }"
         >
-          <div v-if="msg.isUser" class="avatar user-avatar"></div>
-          <div v-else class="avatar bot-avatar"></div>
+          <div v-if="msg.isUser" class="avatar user-avatar">🧑</div>
+          <div v-else class="avatar bot-avatar">🤖</div>
           <div class="message-content">
             <div class="user-info" v-if="msg.isUser">
               <span class="user-name">You:</span>
