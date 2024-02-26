@@ -74,7 +74,7 @@ class NLPManager:
         greetings = ["hi", "hello", "hey"]
         for token in doc:
             if token.lower_ in greetings:
-                return "Hello there! How can I assist you today :)?"
+                return "Hello there!👋 How can I assist you today? 😊"
         return None
 
     def analyze_mission_vision(self, doc):
@@ -91,9 +91,9 @@ class NLPManager:
         vision_keywords = ["vision"]
 
         if any(keyword in doc.text.lower() for keyword in mission_keywords):
-            return "To propel Africa's prosperity by connecting its people, cultures and markets."
+            return "To propel 🌍Africa's prosperity by connecting its 👩🏾‍🤝‍👨🏿people, 🦁🐘🥁cultures and 🏬markets."
         elif any(keyword in doc.text.lower() for keyword in vision_keywords):
-            return "To be Africa's preferred and sustainable Aviation group."
+            return "To be 🌍Africa's preferred and sustainable Aviation group.✈️"
         else:
             return None
 
@@ -138,7 +138,7 @@ class NLPManager:
             "integrity":"👉 We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
             "accountability":"👉 We take initiative and responsibility for our actions, decisions and results."
         }
-        default_message = "I don't have an answer for that, sorry."
+        default_message = "I don't have an answer for that, sorry.😔"
 
         # Get the scenario for the given value
         scenario = scenarios.get(value.lower(), default_message)
