@@ -92,6 +92,6 @@ img {
 	position: absolute;
 	top: 10px;
 	right: 450px;
-	transform: translateX(-20%);
+	transform: translateX(-30%);
 }
 </style>
