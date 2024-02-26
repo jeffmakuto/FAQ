@@ -107,7 +107,7 @@ class NLPManager:
         Returns:
             str or None: A scenario description for the detected SCIA value or None if no relevant keywords are found.
         """
-        scia_keywords = ["🚨🚦safety", "🤗👐customer obsession", "🤝💎integrity", "✅🙋accountability"]
+        scia_keywords = ["safety", "customer obsession", "integrity", "accountability"]
         values_keyword = "values"
     
         # Check if "values" is present in the document
@@ -133,12 +133,12 @@ class NLPManager:
             str: A scenario description or a default message if the value is not recognized.
         """
         scenarios = {
-            "🚨🚦safety":"👉 Safety is the foundation of everything we do.",
-            "🤗👐customer obsession":"👉 We commit to creating positive memorable experiences for our customers.",
-            "🤝💎integrity":"👉 We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
-            "✅🙋accountability":"👉 We take initiative and responsibility for our actions, decisions and results."
+            "safety":"👉 Safety is the foundation of everything we do. 🚨🚦",
+            "customer obsession":"👉 We commit to creating positive memorable experiences for our customers. 🤗👐",
+            "integrity":"👉 We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect. 🤝💎",
+            "accountability":"👉 We take initiative and responsibility for our actions, decisions and results. ✅🙋"
         }
-        default_message = "I don't have an answer for that, sorry.😔"
+        default_message = "I don't have an answer for that, sorry. 😔"
 
         # Get the scenario for the given value
         scenario = scenarios.get(value.lower(), default_message)
