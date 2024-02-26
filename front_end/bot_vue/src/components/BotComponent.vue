@@ -137,7 +137,7 @@ export default {
   width: 600px;
   height: 300px;
   position: fixed;
-  top: 55%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
