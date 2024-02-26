@@ -57,15 +57,6 @@ export default {
     };
   },
 
-  mounted() {
-    const welcomeMessage = { text: "Hello there! I am Bota! How can I be of help today?", isUser: false, timestamp: this.getCurrentTimestamp() };
-    this.messages.unshift(welcomeMessage);
-
-    setTimeout(() => {
-      this.clearChat();
-    }, 3000);
-  },
-
   methods: {
     sendMessage() {
       const userMessage = { text: this.message, isUser: true, timestamp: this.getCurrentTimestamp() };
