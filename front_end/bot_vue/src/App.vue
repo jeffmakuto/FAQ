@@ -39,43 +39,59 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #2c3e50;
+	margin-top: 60px;
+	position: relative;     
 }
 
 .mission-container,
-.vision-container,
-.values-list-container {
-  margin: 10px;
-  width: 90%;
-  max-width: 600px;
+.vision-container {
+	position: fixed;
+	z-index: 999;
+}
+
+.mission-container {
+	top: 10px;
+	left: 10px;
+}
+
+.vision-container {
+	top: 10px;
+  right: 10px;
 }
 
 .content-container {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	margin-top: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.values-list-container {
+	position: fixed;
+	top: 50%;
+	left: 10px;
+	transform: translateY(-50%);
 }
 
 h1 {
-  margin-top: 20px;
+	height: auto;
+	position: absolute;
+	top: -60px;
+	right: 550px
 }
 
 img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 20px;
+	max-width: 100%;
+	height: auto;
+	position: absolute;
+	top: 10px;
+	right: 450px;
 }
-
 /* Media Queries for Responsive Design */
 
 @media screen and (min-width: 768px) {
