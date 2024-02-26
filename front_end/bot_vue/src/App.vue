@@ -82,7 +82,8 @@ h1 {
 	height: auto;
 	position: absolute;
 	top: -60px;
-	right: 550px
+	right: 550px;
+	transform: translateX(-50%);
 }
 
 img {
@@ -91,5 +92,6 @@ img {
 	position: absolute;
 	top: 10px;
 	right: 450px;
+	transform: translateX(-50%);
 }
 </style>
