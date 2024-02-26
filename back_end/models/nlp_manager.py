@@ -133,10 +133,10 @@ class NLPManager:
             str: A scenario description or a default message if the value is not recognized.
         """
         scenarios = {
-            "safety":"- Safety is the foundation of everything we do.",
-            "customer obsession":"- We commit to creating positive memorable experiences for our customers.",
-            "integrity":"- We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
-            "accountability":"-We take initiative and responsibility for our actions, decisions and results."
+            "🚨🚦safety":"👉 Safety is the foundation of everything we do.",
+            "🤗👐customer obsession":"👉 We commit to creating positive memorable experiences for our customers.",
+            "🤝💎integrity":"👉 We shall be ethical and trustworthy in all our engagements and we shall treat each person with respect.",
+            "✅🙋accountability":"👉 We take initiative and responsibility for our actions, decisions and results."
         }
         default_message = "I don't have an answer for that, sorry.😔"
 
