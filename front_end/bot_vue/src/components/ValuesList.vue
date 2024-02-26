@@ -97,7 +97,7 @@ h2 {
 }
 
 .fade-enter-to {
-  opacity: 1;
+  opacity: 0;
   transform: scaleY(0);
 }
 
