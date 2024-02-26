@@ -108,6 +108,12 @@ class NLPManager:
             str or None: A scenario description for the detected SCIA value or None if no relevant keywords are found.
         """
         scia_keywords = ["safety", "customer obsession", "integrity", "accountability"]
+        values_keyword = "values"
+    
+        # Check if "values" is present in the document
+        if values_keyword in doc.text.lower():
+            scia_values = [keyword.capitalize() for keyword in scia_keywords]
+            return "\n".join(scia_values)
 
         for keyword in scia_keywords:
             if keyword in doc.text.lower():
