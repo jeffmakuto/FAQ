@@ -111,8 +111,8 @@ export default {
   right: 20px;
   width: 350px;
   max-width: 600px;
-  height: 300px;
-  max-height: 500px;
+  height: auto;
+  max-height: 350px;
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -126,7 +126,7 @@ export default {
 
 .enlarged {
   width: 600px;
-  height: 500px;
+  height: 350px;
   position: fixed;
   top: 57%;
   left: 50%;
