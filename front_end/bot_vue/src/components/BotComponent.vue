@@ -110,7 +110,7 @@ export default {
   bottom: 50px;
   right: 20px;
   width: auto;
-  max-width: 600px;
+  max-width: 400px;
   height: auto;
   max-height: 300px;
   background-color: #ffffff;
