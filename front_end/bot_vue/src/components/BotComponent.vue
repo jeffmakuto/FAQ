@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }" v-if="isChatBoxEnlarged">
+    <div class="chatbox" :class="{ enlarged: isChatBoxEnlarged }">
       <div class="header">Bota😊</div>
       <div class="message-container" ref="messageContainer">
         <SpeakUpMessage :showSpeakUpMessage="showSpeakUpMessage && messages.length === 0" />
@@ -109,9 +109,9 @@ export default {
   position: fixed;
   bottom: 50px;
   right: 20px;
-  width: auto;
-  max-width: 350px;
-  height: auto;
+  width: 350px;
+  max-width: 600px;
+  height: 300px;
   max-height: 500px;
   background-color: #ffffff;
   border: 1px solid #ccc;
@@ -126,7 +126,7 @@ export default {
 
 .enlarged {
   width: 600px;
-  height: 400px;
+  height: 500px;
   position: fixed;
   top: 57%;
   left: 50%;
