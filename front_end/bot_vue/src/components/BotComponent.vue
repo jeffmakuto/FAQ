@@ -62,7 +62,7 @@ export default {
       const userMessage = { text: this.message, isUser: true, timestamp: this.getCurrentTimestamp() };
       this.messages.push(userMessage);
 
-      axios.post('http://35.174.207.200:5000/bot', { user_input: this.message })
+      axios.post('http://localhost:5000/bot', { user_input: this.message })
         .then(response => {
           const botReply = {
             text: `${response.data.bot_response}`,
