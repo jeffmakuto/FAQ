@@ -62,7 +62,7 @@ export default {
       const userMessage = { text: this.message, isUser: true, timestamp: this.getCurrentTimestamp() };
       this.messages.push(userMessage);
 
-      axios.post('https://v1-bot-phlc.onrender.com/bot', { user_input: this.message })
+      axios.post(`${process.env.BACKEND_URL}/bot`, { user_input: this.message })
         .then(response => {
           const botReply = {
             text: `${response.data.bot_response}`,
