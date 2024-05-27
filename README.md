@@ -138,7 +138,7 @@ Access the chat interface by opening the provided frontend URL in a web browser.
 
 ## License
 
-This project is licensed under the [Jeff Makuto Proprietary License](LICENSE).
+This project is licensed under the [Apache 2.0 License](LICENSE).
 
 © 2024 Jeff Makuto. All rights reserved.
 
