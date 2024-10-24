@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 app.config.from_object(__name__)
 
-CORS(app, resources={r"/*":{'origins':'*'}})
+CORS(app, resources={r"/*":{'origins':'http://localhost:3000/api/chat'}})
 
 # Global strict slashes
 app.url_map.strict_slashes = False
